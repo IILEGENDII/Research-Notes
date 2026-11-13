@@ -1,0 +1,7 @@
+# Welcome {.unnumbered}
+
+This is a research and learning notebook for mathematical derivations, textbook and course notes, literature notes, and computational analyses.
+
+Use the left sidebar to browse chapters and the table of contents to navigate within a chapter.
+
+Begin with [Mathematical Notes](notes/mathematics.qmd) or [Research Notes](notes/research.qmd).

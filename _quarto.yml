@@ -1,0 +1,41 @@
+project:
+  type: book
+  output-dir: _book
+
+book:
+  title: "Research Notes"
+  subtitle: "Research, mathematics, and learning"
+  site-url: "https://iilegendii.github.io/Research-Notes/"
+  repo-url: "https://github.com/IILEGENDII/Research-Notes"
+  repo-actions: [source]
+  page-navigation: true
+  reader-mode: true
+  sidebar:
+    search: true
+    style: docked
+  chapters:
+    - index.qmd
+    - part: "Foundations"
+      chapters:
+        - notes/mathematics.qmd
+    - part: "Research"
+      chapters:
+        - notes/research.qmd
+    - references.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme:
+      - litera
+      - styles.scss
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    code-copy: true
+    html-math-method: mathjax
+    link-external-newwindow: true
+
+execute:
+  freeze: auto

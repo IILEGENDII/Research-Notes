@@ -1,0 +1,21 @@
+# Research Notes
+
+## Literature note template
+
+**Research question:** What problem is the paper addressing?
+
+**Approach:** Which models, experiments, or numerical methods are used?
+
+**Key results:** What are the main findings?
+
+**Assumptions and limitations:** Under what conditions are the conclusions valid?
+
+**Connections:** Which derivations, concepts, and other papers does this relate to?
+
+## Computational notes
+
+You can place Python code in Quarto code cells backed by Jupyter. Add Python and Jupyter dependencies to the publishing workflow if you want cloud builds to execute those cells.
+
+## Research reproducibility
+
+Record data provenance, code versions, units, parameter choices, and enough information to reproduce each result.

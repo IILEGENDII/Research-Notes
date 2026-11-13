@@ -1,0 +1,29 @@
+# Mathematical Notes
+
+## Example: a numbered equation
+
+The Gaussian integral is
+
+$$
+\int_{-\infty}^{\infty} e^{-x^2}\,dx = \sqrt{\pi}.
+$$ {#eq-gaussian}
+
+Equation @eq-gaussian illustrates mathematical cross-referencing.
+
+## Example: a theorem
+
+::: {#thm-pythagoras}
+## Pythagorean theorem
+
+For a right triangle with legs $a$ and $b$ and hypotenuse $c$,
+
+$$a^2+b^2=c^2.$$
+:::
+
+## Structure for a derivation
+
+1. **Assumptions:** State the physical and mathematical assumptions.
+2. **Governing equations:** Define all variables and conventions.
+3. **Derivation:** Show each step with properly labeled equations.
+4. **Validation:** Check units, limits, and special cases.
+5. **References:** Cite the source material.

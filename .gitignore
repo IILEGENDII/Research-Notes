@@ -1,0 +1,13 @@
+# Quarto temporary and generated output
+/.quarto/
+/_book/
+
+# Local language environments and caches
+/.venv/
+__pycache__/
+.ipynb_checkpoints/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+Desktop.ini

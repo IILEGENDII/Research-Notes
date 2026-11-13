@@ -1,0 +1,6 @@
+# References {.unnumbered}
+
+This page will list works cited in the notes.
+
+::: {#refs}
+:::

@@ -1,0 +1,10 @@
+/*-- scss:defaults --*/
+$font-family-serif: Georgia, "Times New Roman", serif;
+$headings-font-family: Georgia, "Times New Roman", serif;
+$body-color: #242b35;
+$link-color: #24456d;
+
+/*-- scss:rules --*/
+main.content { line-height: 1.68; }
+main.content h1, main.content h2, main.content h3 { letter-spacing: -0.015em; }
+.quarto-title-block .title { font-weight: 600; }
