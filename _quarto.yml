@@ -5,6 +5,7 @@ project:
 book:
   title: "Research Notes"
   subtitle: "Understanding the cosmos step by step..."
+  favicon: phi-favicon.svg
   site-url: "https://IILEGENDII.github.io/Research-Notes/"
   repo-url: "https://github.com/IILEGENDII/Research-Notes"
   repo-actions: [source]
