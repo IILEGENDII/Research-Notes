@@ -42,7 +42,57 @@ main.content h1, main.content h2, main.content h3 { letter-spacing: -0.015em; }
 #quarto-sidebar .sidebar-header .sidebar-tools-main .quarto-navigation-tool:focus-visible {
   opacity: 1;
 }
-#quarto-sidebar .sidebar-header .sidebar-tools-main .dropdown-menu {
-  max-height: min(60vh, 26rem);
+#quarto-sidebar .sidebar-header .sidebar-tools-main .dropdown-menu.translation-search-menu {
+  width: 19rem;
+  max-width: min(19rem, calc(100vw - 2rem));
+  max-height: min(65vh, 30rem);
+  padding: 0;
+  overflow: hidden;
+  border-radius: 0.5rem;
+}
+#quarto-sidebar .translation-search-header {
+  padding: 0.75rem 0.8rem 0.45rem;
+}
+#quarto-sidebar .translation-search-label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.84rem;
+  margin-bottom: 0.4rem;
+}
+#quarto-sidebar .translation-search-input {
+  width: 100%;
+}
+#quarto-sidebar .translation-search-info {
+  font-size: 0.72rem;
+  opacity: 0.73;
+  margin-top: 0.4rem;
+}
+#quarto-sidebar .translation-list-wrapper {
+  min-height: 0;
+}
+#quarto-sidebar .translation-results {
+  list-style: none;
+  margin: 0;
+  padding: 0.25rem 0;
+  max-height: min(42vh, 19rem);
   overflow-y: auto;
+  overscroll-behavior: contain;
+}
+#quarto-sidebar .translation-language-link {
+  font-size: 0.86rem;
+  padding: 0.3rem 0.85rem;
+  white-space: normal;
+  line-height: 1.35;
+}
+#quarto-sidebar .translation-search-footer {
+  padding: 0.55rem 0.8rem;
+  font-size: 0.73rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  border-top: 1px solid var(--bs-border-color, #ddd);
+}
+#quarto-sidebar .translation-no-results {
+  padding: 0.6rem 0.85rem;
+  opacity: 0.8;
 }

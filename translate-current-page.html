@@ -1,18 +1,118 @@
 <script>
-/* Keep each language option pointed at the page the reader is viewing.
- * Translation is performed by Google Translate, not by Quarto or this site.
- */
-document.addEventListener("DOMContentLoaded", function () {
-  const links = document.querySelectorAll(
-    '#quarto-sidebar .sidebar-tools-main .dropdown-menu a[href^="https://translate.google.com/translate?"]'
-  );
-  links.forEach(function (link) {
-    const url = new URL(link.href);
-    if (url.hostname !== "translate.google.com" || url.pathname !== "/translate") return;
-    url.searchParams.set("u", window.location.href);
-    link.href = url.toString();
-    link.rel = "noopener noreferrer";
-    link.title = "Machine-translate the current page using Google Translate";
-  });
-});
+/* Searchable language picker for Quarto sidebar.
+   Google Translate website links are used instead of the retired embedded widget.
+   Language catalog: KOReader's Google Translate list (249, checked Nov 2026).
+   https://github.com/koreader/koreader/blob/master/frontend/ui/translator.lua
+   Translation happens on Google's site; mathematical terminology should be checked.
+*/
+(function () {
+  "use strict";
+  const LANGUAGES = [["ab","Abkhaz"],["ace","Acehnese"],["ach","Acholi"],["aa","Afar"],["af","Afrikaans"],["sq","Albanian"],["alz","Alur"],["am","Amharic"],["ar","Arabic"],["hy","Armenian"],["as","Assamese"],["av","Avar"],["awa","Awadhi"],["ay","Aymara"],["az","Azerbaijani"],["ban","Balinese"],["bal","Baluchi"],["bm","Bambara"],["bci","Baoulé"],["ba","Bashkir"],["eu","Basque"],["btx","Batak Karo"],["bts","Batak Simalungun"],["bbc","Batak Toba"],["be","Belarusian"],["bem","Bemba"],["bn","Bengali"],["bew","Betawi"],["bho","Bhojpuri"],["bik","Bikol"],["bs","Bosnian"],["br","Breton"],["bg","Bulgarian"],["bua","Buryat"],["yue","Cantonese"],["ca","Catalan"],["ceb","Cebuano"],["ch","Chamorro"],["ce","Chechen"],["ny","Chichewa"],["zh","Chinese (Simplified)"],["zh-TW","Chinese (Traditional)"],["chk","Chuukese"],["cv","Chuvash"],["co","Corsican"],["crh","Crimean Tatar (Cyrillic)"],["crh-Latn","Crimean Tatar (Latin)"],["hr","Croatian"],["cs","Czech"],["da","Danish"],["fa-AF","Dari"],["dv","Dhivehi"],["din","Dinka"],["doi","Dogri"],["dov","Dombe"],["nl","Dutch"],["dyu","Dyula"],["dz","Dzongkha"],["en","English"],["eo","Esperanto"],["et","Estonian"],["ee","Ewe"],["fo","Faroese"],["fj","Fijian"],["tl","Filipino"],["fi","Finnish"],["fon","Fon"],["fr","French"],["fr-CA","French (Canada)"],["fy","Frisian"],["fur","Friulian"],["ff","Fulani"],["gaa","Ga"],["gl","Galician"],["ka","Georgian"],["de","German"],["el","Greek"],["gn","Guarani"],["gu","Gujarati"],["ht","Haitian Creole"],["cnh","Hakha Chin"],["ha","Hausa"],["haw","Hawaiian"],["he","Hebrew"],["hil","Hiligaynon"],["hi","Hindi"],["hmn","Hmong"],["hu","Hungarian"],["hrx","Hunsrik"],["iba","Iban"],["is","Icelandic"],["ig","Igbo"],["ilo","Ilocano"],["id","Indonesian"],["iu-Latn","Inuktut (Latin)"],["iu","Inuktut (Syllabics)"],["ga","Irish"],["it","Italian"],["jam","Jamaican Patois"],["ja","Japanese"],["jw","Javanese"],["kac","Jingpo"],["kl","Kalaallisut"],["kn","Kannada"],["kr","Kanuri"],["pam","Kapampangan"],["kk","Kazakh"],["kha","Khasi"],["km","Khmer"],["cgg","Kiga"],["kg","Kikongo"],["rw","Kinyarwanda"],["ktu","Kituba"],["trp","Kokborok"],["kv","Komi"],["gom","Konkani"],["ko","Korean"],["kri","Krio"],["ku","Kurdish (Kurmanji)"],["ckb","Kurdish (Sorani)"],["ky","Kyrgyz"],["lo","Lao"],["ltg","Latgalian"],["la","Latin"],["lv","Latvian"],["lij","Ligurian"],["li","Limburgish"],["ln","Lingala"],["lt","Lithuanian"],["lmo","Lombard"],["lg","Luganda"],["luo","Luo"],["lb","Luxembourgish"],["mk","Macedonian"],["mad","Madurese"],["mai","Maithili"],["mak","Makassar"],["mg","Malagasy"],["ms","Malay"],["ms-Arab","Malay (Jawi)"],["ml","Malayalam"],["mt","Maltese"],["mam","Mam"],["gv","Manx"],["mi","Maori"],["mr","Marathi"],["mh","Marshallese"],["mwr","Marwadi"],["mfe","Mauritian Creole"],["chm","Meadow Mari"],["mni-Mtei","Meiteilon (Manipuri)"],["min","Minang"],["lus","Mizo"],["mn","Mongolian"],["my","Myanmar (Burmese)"],["nhe","Nahuatl (Eastern Huasteca)"],["ndc-ZW","Ndau"],["nr","Ndebele (South)"],["new","Nepalbhasa (Newari)"],["ne","Nepali"],["bm-Nkoo","NKo"],["no","Norwegian"],["nus","Nuer"],["oc","Occitan"],["or","Odia (Oriya)"],["om","Oromo"],["os","Ossetian"],["pag","Pangasinan"],["pap","Papiamento"],["ps","Pashto"],["fa","Persian"],["pl","Polish"],["pt","Portuguese (Brazil)"],["pt-PT","Portuguese (Portugal)"],["pa","Punjabi (Gurmukhi)"],["pa-Arab","Punjabi (Shahmukhi)"],["qu","Quechua"],["kek","Qʼeqchiʼ"],["rom","Romani"],["ro","Romanian"],["rn","Rundi"],["ru","Russian"],["se","Sami (North)"],["sm","Samoan"],["sg","Sango"],["sa","Sanskrit"],["sat-Latn","Santali (Latin)"],["sat","Santali (Ol Chiki)"],["gd","Scots Gaelic"],["nso","Sepedi"],["sr","Serbian"],["st","Sesotho"],["crs","Seychellois Creole"],["shn","Shan"],["sn","Shona"],["scn","Sicilian"],["szl","Silesian"],["sd","Sindhi"],["si","Sinhala"],["sk","Slovak"],["sl","Slovenian"],["so","Somali"],["es","Spanish"],["su","Sundanese"],["sus","Susu"],["sw","Swahili"],["ss","Swati"],["sv","Swedish"],["ty","Tahitian"],["tg","Tajik"],["ber-Latn","Tamazight"],["ber","Tamazight (Tifinagh)"],["ta","Tamil"],["tt","Tatar"],["te","Telugu"],["tet","Tetum"],["th","Thai"],["bo","Tibetan"],["ti","Tigrinya"],["tiv","Tiv"],["tpi","Tok Pisin"],["to","Tongan"],["lua","Tshiluba"],["ts","Tsonga"],["tn","Tswana"],["tcy","Tulu"],["tum","Tumbuka"],["tr","Turkish"],["tk","Turkmen"],["tyv","Tuvan"],["ak","Twi"],["udm","Udmurt"],["uk","Ukrainian"],["ur","Urdu"],["ug","Uyghur"],["uz","Uzbek"],["ve","Venda"],["vec","Venetian"],["vi","Vietnamese"],["war","Waray"],["cy","Welsh"],["wo","Wolof"],["xh","Xhosa"],["sah","Yakut"],["yi","Yiddish"],["yo","Yoruba"],["yua","Yucatec Maya"],["zap","Zapotec"],["zu","Zulu"]];
+  const clean = text => text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleLowerCase();
+  let widgetId = 0;
+  function makeLink(code, name) {
+    const url = new URL("https://translate.google.com/translate");
+    url.searchParams.set("sl", "auto");
+    url.searchParams.set("tl", code);
+    url.searchParams.set("u", window.location.href.split("#")[0]);
+    const item = document.createElement("li");
+    const anchor = document.createElement("a");
+    anchor.className = "dropdown-item translation-language-link";
+    anchor.href = url.toString();
+    anchor.target = "_blank";
+    anchor.rel = "noopener noreferrer";
+    anchor.title = "Translate current page into " + name + " using Google Translate";
+    anchor.textContent = name;
+    item.appendChild(anchor);
+    return item;
+  }
+  function initialize(toggle) {
+    const dropdown = toggle.closest(".dropdown");
+    const menu = dropdown && dropdown.querySelector(".dropdown-menu");
+    if (!menu || menu.classList.contains("translation-search-menu")) return;
+    widgetId += 1;
+    const inputId = "translation-language-search-" + widgetId;
+    toggle.setAttribute("data-bs-auto-close", "outside");
+    toggle.setAttribute("aria-label", "Translate page");
+    toggle.title = "Translate page";
+
+    menu.classList.add("translation-search-menu");
+    menu.replaceChildren();
+
+    const header = document.createElement("li");
+    header.className = "translation-search-header";
+    const label = document.createElement("label");
+    label.htmlFor = inputId;
+    label.className = "translation-search-label";
+    label.textContent = "Translate page to";
+    const input = document.createElement("input");
+    input.id = inputId;
+    input.type = "search";
+    input.className = "form-control form-control-sm translation-search-input";
+    input.autocomplete = "off";
+    input.spellcheck = false;
+    input.placeholder = "Search 249 languages…";
+    input.setAttribute("aria-label", "Search translation languages");
+    const info = document.createElement("div");
+    info.className = "translation-search-info";
+    info.textContent = "Machine translation by Google";
+    header.append(label, input, info);
+    menu.appendChild(header);
+
+    const results = document.createElement("li");
+    results.className = "translation-list-wrapper";
+    const list = document.createElement("ul");
+    list.className = "translation-results";
+    list.setAttribute("aria-label", "Languages");
+    results.appendChild(list);
+    menu.appendChild(results);
+
+    const footer = document.createElement("li");
+    footer.className = "translation-search-footer";
+    const counter = document.createElement("span");
+    counter.setAttribute("aria-live", "polite");
+    const helper = document.createElement("a");
+    helper.href = "https://translate.google.com/";
+    helper.target = "_blank";
+    helper.rel = "noopener noreferrer";
+    helper.textContent = "Google Translate";
+    footer.append(counter, helper);
+    menu.appendChild(footer);
+
+    function render() {
+      const q = clean(input.value.trim());
+      const matches = LANGUAGES.filter(([code, name]) => clean(name).includes(q) || clean(code).includes(q));
+      const entries = document.createDocumentFragment();
+      matches.forEach(([code, name]) => entries.appendChild(makeLink(code, name)));
+      list.replaceChildren(entries);
+      counter.textContent = matches.length + " of " + LANGUAGES.length + " languages";
+      if (!matches.length) {
+        const empty = document.createElement("li");
+        empty.className = "translation-no-results";
+        empty.textContent = "No matching languages";
+        list.appendChild(empty);
+      }
+    }
+    render();
+    input.addEventListener("input", render);
+    input.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowDown") {
+        const first = list.querySelector("a");
+        if (first) {e.preventDefault(); first.focus();}
+      } else if (e.key === "Escape") {
+        const bootstrap = window.bootstrap;
+        const instance = bootstrap && bootstrap.Dropdown && bootstrap.Dropdown.getOrCreateInstance(toggle);
+        if (instance) instance.hide();
+        toggle.focus();
+      }
+    });
+    toggle.addEventListener("shown.bs.dropdown", function () { input.focus(); });
+    menu.addEventListener("click", function (e) { e.stopPropagation(); });
+  }
+  function init() {
+    document.querySelectorAll('.quarto-navigation-tool.dropdown-toggle[aria-label="Translate page"]').forEach(initialize);
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
+  else init();
+})();
 </script>

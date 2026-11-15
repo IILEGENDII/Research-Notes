@@ -18,36 +18,9 @@ book:
         text: "Translate page"
         aria-label: "Translate page"
         menu:
-            - text: "Spanish"
-              href: "https://translate.google.com/translate?sl=auto&tl=es&u=https%3A%2F%2FIILEGENDII.github.io%2FResearch-Notes%2F"
-              target: _blank
-            - text: "French"
-              href: "https://translate.google.com/translate?sl=auto&tl=fr&u=https%3A%2F%2FIILEGENDII.github.io%2FResearch-Notes%2F"
-              target: _blank
-            - text: "German"
-              href: "https://translate.google.com/translate?sl=auto&tl=de&u=https%3A%2F%2FIILEGENDII.github.io%2FResearch-Notes%2F"
-              target: _blank
-            - text: "Chinese (Simplified)"
-              href: "https://translate.google.com/translate?sl=auto&tl=zh-CN&u=https%3A%2F%2FIILEGENDII.github.io%2FResearch-Notes%2F"
-              target: _blank
-            - text: "Chinese (Traditional)"
-              href: "https://translate.google.com/translate?sl=auto&tl=zh-TW&u=https%3A%2F%2FIILEGENDII.github.io%2FResearch-Notes%2F"
-              target: _blank
-            - text: "Japanese"
-              href: "https://translate.google.com/translate?sl=auto&tl=ja&u=https%3A%2F%2FIILEGENDII.github.io%2FResearch-Notes%2F"
-              target: _blank
-            - text: "Korean"
-              href: "https://translate.google.com/translate?sl=auto&tl=ko&u=https%3A%2F%2FIILEGENDII.github.io%2FResearch-Notes%2F"
-              target: _blank
-            - text: "Russian"
-              href: "https://translate.google.com/translate?sl=auto&tl=ru&u=https%3A%2F%2FIILEGENDII.github.io%2FResearch-Notes%2F"
-              target: _blank
-            - text: "Greek"
-              href: "https://translate.google.com/translate?sl=auto&tl=el&u=https%3A%2F%2FIILEGENDII.github.io%2FResearch-Notes%2F"
-              target: _blank
-            - text: "Arabic"
-              href: "https://translate.google.com/translate?sl=auto&tl=ar&u=https%3A%2F%2FIILEGENDII.github.io%2FResearch-Notes%2F"
-              target: _blank
+          - text: "Open Google Translate (JavaScript required for full language selector)"
+            href: "https://translate.google.com/"
+            target: _blank
   chapters:
     - index.qmd
 
