@@ -216,3 +216,8 @@ main.content h1, main.content h2, main.content h3 { letter-spacing: -0.015em; }
     margin-bottom: 1rem;
   }
 }
+
+/* Homepage: retain its contents entry without a duplicate visible heading or gap. */
+main.content > section.home-introduction > h1 {
+  display: none;
+}
