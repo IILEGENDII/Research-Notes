@@ -39,6 +39,24 @@
     menu.classList.add("translation-search-menu");
     menu.replaceChildren();
 
+    // Fit the popup to the actual sidebar instead of an oversized fixed width.
+    function fitMenuToSidebar() {
+      const sidebar = document.getElementById("quarto-sidebar");
+      const title = sidebar && sidebar.querySelector(".sidebar-title");
+      if (!sidebar || !title) return;
+      const available = Math.min(
+        title.getBoundingClientRect().width - 4,
+        sidebar.getBoundingClientRect().width - 28,
+        document.documentElement.clientWidth - 24
+      );
+      if (available > 0) {
+        menu.style.setProperty("--translation-menu-width", Math.floor(available) + "px");
+      }
+    }
+    fitMenuToSidebar();
+    toggle.addEventListener("show.bs.dropdown", fitMenuToSidebar);
+    window.addEventListener("resize", fitMenuToSidebar);
+
     const header = document.createElement("li");
     header.className = "translation-search-header";
     const label = document.createElement("label");
@@ -51,11 +69,11 @@
     input.className = "form-control form-control-sm translation-search-input";
     input.autocomplete = "off";
     input.spellcheck = false;
-    input.placeholder = "Search 249 languages…";
+    input.placeholder = "Search languages…";
     input.setAttribute("aria-label", "Search translation languages");
     const info = document.createElement("div");
     info.className = "translation-search-info";
-    info.textContent = "Machine translation by Google";
+    info.textContent = "Powered by Google";
     header.append(label, input, info);
     menu.appendChild(header);
 
