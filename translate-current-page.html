@@ -1,0 +1,18 @@
+<script>
+/* Keep each language option pointed at the page the reader is viewing.
+ * Translation is performed by Google Translate, not by Quarto or this site.
+ */
+document.addEventListener("DOMContentLoaded", function () {
+  const links = document.querySelectorAll(
+    '#quarto-sidebar .sidebar-tools-main .dropdown-menu a[href^="https://translate.google.com/translate?"]'
+  );
+  links.forEach(function (link) {
+    const url = new URL(link.href);
+    if (url.hostname !== "translate.google.com" || url.pathname !== "/translate") return;
+    url.searchParams.set("u", window.location.href);
+    link.href = url.toString();
+    link.rel = "noopener noreferrer";
+    link.title = "Machine-translate the current page using Google Translate";
+  });
+});
+</script>
