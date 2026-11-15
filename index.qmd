@@ -8,10 +8,6 @@ These are my research and course notes. Use the left sidebar to browse chapters 
 
 ## Quote Wall {.unnumbered #quote-wall}
 
-[Words on the cosmos, knowledge, understanding, and truth.]{.quote-wall-intro}
-
-### Cosmos & Wonder {.unnumbered #cosmos-and-wonder}
-
 :::::: {.quote-grid}
 
 ::::: {.quote-card}
@@ -97,12 +93,6 @@ These are my research and course notes. Use the left sidebar to browse chapters 
 ::::
 
 :::::
-
-::::::
-
-### Knowledge & Discovery {.unnumbered #knowledge-and-discovery}
-
-:::::: {.quote-grid}
 
 ::::: {.quote-card}
 
@@ -190,12 +180,6 @@ These are my research and course notes. Use the left sidebar to browse chapters 
 
 :::::
 
-::::::
-
-### Patterns & Understanding {.unnumbered #patterns-and-understanding}
-
-:::::: {.quote-grid}
-
 ::::: {.quote-card}
 
 > The eternal mystery of the world is its comprehensibility.
@@ -281,12 +265,6 @@ These are my research and course notes. Use the left sidebar to browse chapters 
 
 :::::
 
-::::::
-
-### Truth & the Unknown {.unnumbered #truth-and-the-unknown}
-
-:::::: {.quote-grid}
-
 ::::: {.quote-card}
 
 > Thought is only a gleam in the midst of a long night. But it is this gleam which is everything.
@@ -370,7 +348,5 @@ These are my research and course notes. Use the left sidebar to browse chapters 
 :::::
 
 ::::::
-
-[Selected excerpts; source links provide context. Translator credits and reported attributions are noted where applicable.]{.quote-wall-note}
 
 :::::::
