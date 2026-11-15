@@ -16,13 +16,6 @@ book:
     style: docked
   chapters:
     - index.qmd
-    - part: "Foundations"
-      chapters:
-        - notes/mathematics.qmd
-    - part: "Research"
-      chapters:
-        - notes/research.qmd
-    - references.qmd
 
 bibliography: references.bib
 
