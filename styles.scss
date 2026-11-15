@@ -110,3 +110,109 @@ main.content h1, main.content h2, main.content h3 { letter-spacing: -0.015em; }
   padding: 0.6rem 0.85rem;
   opacity: 0.8;
 }
+
+/* Quote wall: scoped to the Welcome page's collection. */
+.quote-wall {
+  margin-top: 3rem;
+  padding-top: 0.25rem;
+  --quote-ink: #152e4d;
+  --quote-accent: #b59a65;
+  --quote-muted: #5d6570;
+}
+.quote-wall h2 {
+  color: var(--quote-ink);
+  border-bottom: 1px solid #d9dfe6;
+  padding-bottom: 0.6rem;
+  margin-bottom: 0.65rem;
+}
+.quote-wall .quote-wall-intro {
+  display: block;
+  color: var(--quote-muted);
+  font-size: 0.94rem;
+}
+.quote-wall h3 {
+  font-family: var(--bs-body-font-family);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--quote-ink);
+  margin: 2.4rem 0 1rem;
+}
+.quote-wall .quote-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  gap: 1.05rem;
+  margin-bottom: 1.5rem;
+}
+.quote-wall .quote-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 1.35rem 1.3rem 1.15rem;
+  border: 1px solid #e1e4e8;
+  border-top: 2px solid var(--quote-accent);
+  border-radius: 0.3rem;
+  background: #fcfbf8;
+  box-shadow: 0 2px 6px rgba(21, 46, 77, 0.035);
+  break-inside: avoid;
+}
+.quote-wall .quote-card blockquote {
+  padding: 0;
+  margin: 0 0 1.3rem;
+  border: 0;
+  color: var(--quote-ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.06rem;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+.quote-wall .quote-card blockquote p {
+  margin: 0;
+}
+.quote-wall .quote-credit {
+  margin-top: auto;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--quote-muted);
+  overflow-wrap: anywhere;
+}
+.quote-wall .quote-credit p { margin: 0; }
+.quote-wall .quote-credit strong {
+  color: var(--quote-ink);
+  font-size: 0.83rem;
+  font-weight: 600;
+}
+.quote-wall .quote-credit a {
+  color: #365879;
+  text-decoration-color: #b7c5d3;
+  text-underline-offset: 0.15em;
+}
+.quote-wall .quote-credit a:hover,
+.quote-wall .quote-credit a:focus-visible {
+  color: #132d4b;
+  text-decoration: underline;
+}
+.quote-wall .quote-note {
+  font-size: 0.72rem;
+}
+.quote-wall .quote-wall-note {
+  display: block;
+  padding-top: 0.8rem;
+  border-top: 1px solid #e1e4e8;
+  color: var(--quote-muted);
+  font-size: 0.77rem;
+  line-height: 1.6;
+}
+@media (max-width: 575.98px) {
+  .quote-wall .quote-grid { grid-template-columns: minmax(0, 1fr); }
+  .quote-wall .quote-card { padding: 1.15rem; }
+}
+@media print {
+  .quote-wall .quote-grid { display: block; }
+  .quote-wall .quote-card {
+    box-shadow: none;
+    background: transparent;
+    margin-bottom: 1rem;
+  }
+}

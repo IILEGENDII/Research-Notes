@@ -1,3 +1,376 @@
 # Welcome {.unnumbered}
 
 These are my research and course notes. Use the left sidebar to browse chapters and the table of contents to navigate within a chapter.
+
+<!-- Quote wall: keep the Welcome text above unchanged. -->
+
+::::::: {.quote-wall}
+
+## Quote Wall {.unnumbered #quote-wall}
+
+[Words on the cosmos, knowledge, understanding, and truth.]{.quote-wall-intro}
+
+### Cosmos & Wonder {.unnumbered #cosmos-and-wonder}
+
+:::::: {.quote-grid}
+
+::::: {.quote-card}
+
+> We are a way for the cosmos to know itself.
+
+:::: {.quote-credit}
+
+**Carl Sagan**\
+[*The Planetary Society*](<https://www.planetary.org/the-downlink/seeing-ourselves-in-space>)\
+[As quoted by The Planetary Society.]{.quote-note}
+
+::::
+
+:::::
+
+::::: {.quote-card}
+
+> I have loved the stars too truly to be fearful of the night.
+
+:::: {.quote-credit}
+
+**Sarah Williams**\
+[*The Old Astronomer*](<https://en.wikisource.org/wiki/Twilight_Hours_(1868)/The_Old_Astronomer>)\
+[Twilight Hours (1868); original wording.]{.quote-note}
+
+::::
+
+:::::
+
+::::: {.quote-card}
+
+> Then felt I like some watcher of the skies\
+> When a new planet swims into his ken;
+
+:::: {.quote-credit}
+
+**John Keats**\
+[*On First Looking into Chapman’s Homer*](<https://www.scottishpoetrylibrary.org.uk/poem/first-looking-chapmans-homer/>)
+
+::::
+
+:::::
+
+::::: {.quote-card}
+
+> In the mystical moist night-air, and from time to time,\
+> Look’d up in perfect silence at the stars.
+
+:::: {.quote-credit}
+
+**Walt Whitman**\
+[*When I Heard the Learn’d Astronomer*](<https://poets.org/poem/when-i-heard-learnd-astronomer>)
+
+::::
+
+:::::
+
+::::: {.quote-card}
+
+> But every night come out these envoys of beauty, and light the universe with their admonishing smile.
+
+:::: {.quote-credit}
+
+**Ralph Waldo Emerson**\
+[*Nature, Chapter I*](<https://www.gutenberg.org/cache/epub/71683/pg71683-images.html>)\
+[On the stars.]{.quote-note}
+
+::::
+
+:::::
+
+::::: {.quote-card}
+
+> Equipped with his five senses, man explores the universe around him and calls the adventure Science.
+
+:::: {.quote-credit}
+
+**Edwin Hubble**\
+[*NASA: Interesting Fact of the Month*](<https://www.nasa.gov/space-science-and-astrobiology-at-ames/interesting-fact-of-the-month-current/interesting-fact-of-the-month-2023/>)\
+[As quoted by NASA.]{.quote-note}
+
+::::
+
+:::::
+
+::::::
+
+### Knowledge & Discovery {.unnumbered #knowledge-and-discovery}
+
+:::::: {.quote-grid}
+
+::::: {.quote-card}
+
+> To follow knowledge like a sinking star,\
+> Beyond the utmost bound of human thought.
+
+:::: {.quote-credit}
+
+**Alfred, Lord Tennyson**\
+[*Ulysses*](<https://www.poetryfoundation.org/poems/45392/ulysses>)
+
+::::
+
+:::::
+
+::::: {.quote-card}
+
+> Imagination is the Discovering Faculty, pre-eminently. It is that which penetrates into the unseen worlds around us, the worlds of Science.
+
+:::: {.quote-credit}
+
+**Ada Lovelace**\
+[*The legacy of Ada Lovelace*](<https://artcollection.dcms.gov.uk/stories/the-legacy-of-ada-lovelace/>)\
+[As quoted by the Government Art Collection.]{.quote-note}
+
+::::
+
+:::::
+
+::::: {.quote-card}
+
+> The marble index of a mind for ever\
+> Voyaging through strange seas of Thought, alone.
+
+:::: {.quote-credit}
+
+**William Wordsworth**\
+[*The Prelude, Book III*](<https://www.gutenberg.org/cache/epub/12383/pg12383-images.html>)\
+[Describing the statue of Newton.]{.quote-note}
+
+::::
+
+:::::
+
+::::: {.quote-card}
+
+> …wonder is the feeling of a philosopher, and philosophy begins in wonder.
+
+:::: {.quote-credit}
+
+**Plato**\
+[*Theaetetus*](<https://classics.mit.edu/Plato/theatu.html>)\
+[Socrates speaking; translated by Benjamin Jowett.]{.quote-note}
+
+::::
+
+:::::
+
+::::: {.quote-card}
+
+> All men by nature desire to know.
+
+:::: {.quote-credit}
+
+**Aristotle**\
+[*Metaphysics, Book I*](<https://classics.mit.edu/Aristotle/metaphysics.1.i.html>)\
+[Translated by W. D. Ross.]{.quote-note}
+
+::::
+
+:::::
+
+::::: {.quote-card}
+
+> Ye were not made to live like unto brutes,\
+> But for pursuit of virtue and of knowledge.
+
+:::: {.quote-credit}
+
+**Dante Alighieri**\
+[*Inferno, Canto XXVI*](<https://en.wikisource.org/wiki/Divine_Comedy_(Longfellow_1867)/Volume_1/Canto_26>)\
+[Ulysses speaking; translated by Henry Wadsworth Longfellow.]{.quote-note}
+
+::::
+
+:::::
+
+::::::
+
+### Patterns & Understanding {.unnumbered #patterns-and-understanding}
+
+:::::: {.quote-grid}
+
+::::: {.quote-card}
+
+> The eternal mystery of the world is its comprehensibility.
+
+:::: {.quote-credit}
+
+**Albert Einstein**\
+[*Einstein — Princeton University Press*](<https://press.princeton.edu/books/paperback/9780691169897/einstein>)\
+[1936; as quoted by Princeton University Press.]{.quote-note}
+
+::::
+
+:::::
+
+::::: {.quote-card}
+
+> Nature uses only the longest threads to weave her patterns, so each small piece of her fabric reveals the organization of the entire tapestry.
+
+:::: {.quote-credit}
+
+**Richard Feynman**\
+[*Collected quotations*](<https://feynman.com/fun/quotes/>)
+
+::::
+
+:::::
+
+::::: {.quote-card}
+
+> The Brain—is wider than the Sky—\
+> For—put them side by side—\
+> The one the other will contain\
+> With ease—and You—beside—
+
+:::: {.quote-credit}
+
+**Emily Dickinson**\
+[*The Brain—is wider than the Sky—*](<https://www.lancaster.ac.uk/fass/projects/stylistics/topic3b/5brain.htm>)\
+[Opening stanza.]{.quote-note}
+
+::::
+
+:::::
+
+::::: {.quote-card}
+
+> When we try to pick out anything by itself, we find it hitched to everything else in the universe.
+
+:::: {.quote-credit}
+
+**John Muir**\
+[*My First Summer in the Sierra*](<https://www.gutenberg.org/cache/epub/32540/pg32540-images.html>)
+
+::::
+
+:::::
+
+::::: {.quote-card}
+
+> By space the universe encompasses and swallows me up like an atom; by thought I comprehend the world.
+
+:::: {.quote-credit}
+
+**Blaise Pascal**\
+[*Pensées, §348*](<https://en.wikisource.org/wiki/Page:Blaise_Pascal_works.djvu/128>)\
+[English text in The Harvard Classics.]{.quote-note}
+
+::::
+
+:::::
+
+::::: {.quote-card}
+
+> Hold Infinity in the palm of your hand\
+> And Eternity in an hour
+
+:::: {.quote-credit}
+
+**William Blake**\
+[*Auguries of Innocence*](<https://poets.org/poem/auguries-innocence>)
+
+::::
+
+:::::
+
+::::::
+
+### Truth & the Unknown {.unnumbered #truth-and-the-unknown}
+
+:::::: {.quote-grid}
+
+::::: {.quote-card}
+
+> Thought is only a gleam in the midst of a long night. But it is this gleam which is everything.
+
+:::: {.quote-credit}
+
+**Henri Poincaré**\
+[*The Value of Science*](<https://www.gutenberg.org/cache/epub/39713/pg39713-images.html>)\
+[Translated by George Bruce Halsted.]{.quote-note}
+
+::::
+
+:::::
+
+::::: {.quote-card}
+
+> …through the infinity of the universe the mind which contemplates it achieves some share in infinity.
+
+:::: {.quote-credit}
+
+**Bertrand Russell**\
+[*The Problems of Philosophy, Chapter XV*](<https://en.wikisource.org/wiki/Page:Russell_-_The_Problems_of_Philosophy,_1912.djvu/250>)
+
+::::
+
+:::::
+
+::::: {.quote-card}
+
+> …whilst the great ocean of truth lay all undiscovered before me.
+
+:::: {.quote-credit}
+
+**Isaac Newton**\
+[*Memoirs of Newton, Vol. II, Chapter XXVII*](<https://www.astronomy.ohio-state.edu/pogge.1/Ast162/Unit6/>)\
+[Reported by David Brewster (1855); excerpt.]{.quote-note}
+
+::::
+
+:::::
+
+::::: {.quote-card}
+
+> For truth is rightly named the daughter of time, not of authority.
+
+:::: {.quote-credit}
+
+**Francis Bacon**\
+[*Novum Organum, I.84*](<https://dev.gutenberg.org/files/45988/45988-h/45988-h.htm>)\
+[English translation.]{.quote-note}
+
+::::
+
+:::::
+
+::::: {.quote-card}
+
+> The universe is wider than our views of it.
+
+:::: {.quote-credit}
+
+**Henry David Thoreau**\
+[*Walden, Conclusion*](<https://www.gutenberg.org/cache/epub/205/pg205-images.html>)
+
+::::
+
+:::::
+
+::::: {.quote-card}
+
+> The mystery of creation is like the darkness of night—it is great.
+
+:::: {.quote-credit}
+
+**Rabindranath Tagore**\
+[*Stray Birds, 14*](<https://www.ibiblio.org/eldritch/rt/stray.htm>)\
+[Translated into English by the author.]{.quote-note}
+
+::::
+
+:::::
+
+::::::
+
+[Selected excerpts; source links provide context. Translator credits and reported attributions are noted where applicable.]{.quote-wall-note}
+
+:::::::
