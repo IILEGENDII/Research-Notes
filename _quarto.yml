@@ -22,7 +22,8 @@ book:
             href: "https://translate.google.com/"
             target: _blank
   chapters:
-    - index.qmd
+    - href: index.qmd
+      text: "Introduction"
     - part: research/index.qmd
       chapters: []
     - part: courses/index.qmd
