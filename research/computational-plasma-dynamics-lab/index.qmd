@@ -1,1 +1,3 @@
 # Computational Plasma Dynamics Lab {.unnumbered}
+
+[Derivations for Collision Operators](derivations-for-collision-operators.qmd)
