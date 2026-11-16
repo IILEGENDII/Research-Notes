@@ -3,7 +3,7 @@ project:
   output-dir: _book
 
 book:
-  title: "Research Notes"
+  title: "Philosophiae Naturalis"
   subtitle: "Understanding the cosmos, one step at a time..."
   favicon: phi-favicon-v2.svg
   site-url: "https://IILEGENDII.github.io/Research-Notes/"
@@ -23,6 +23,12 @@ book:
             target: _blank
   chapters:
     - index.qmd
+    - part: research/index.qmd
+      chapters: []
+    - part: courses/index.qmd
+      chapters: []
+    - part: coding/index.qmd
+      chapters: []
 
 bibliography: references.bib
 

@@ -1,4 +1,4 @@
-# Research Notes {.unnumbered .home-introduction #research-notes}
+# Philosophiae Naturalis {.unnumbered .home-introduction #research-notes}
 
 These are my research and course notes. Use the left sidebar to browse chapters and the table of contents to navigate within a chapter.
 
