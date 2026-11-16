@@ -13,25 +13,6 @@ book:
   sidebar:
     search: true
     style: docked
-    collapse-level: 2
-    contents:
-      - href: index.qmd
-        text: "Introduction"
-      - section: "Research"
-        href: research/index.qmd
-        contents:
-          - section: "Computational Plasma Dynamics Lab"
-            href: research/computational-plasma-dynamics-lab/index.qmd
-            contents:
-              - research/computational-plasma-dynamics-lab/derivations-for-collision-operators.qmd
-          - href: research/plasmawise/index.qmd
-            text: "PLASMAWISE"
-          - href: research/rotating-detonation-engines-lab/index.qmd
-            text: "Rotating Detonation Engines Lab"
-      - href: courses/index.qmd
-        text: "Courses"
-      - href: coding/index.qmd
-        text: "Coding"
     tools:
       - icon: translate
         text: "Translate page"
@@ -68,6 +49,7 @@ format:
     html-math-method: mathjax
     link-external-newwindow: true
     include-in-header: translate-current-page.html
+    include-after-body: nested-research-navigation.html
 
 execute:
   freeze: auto
