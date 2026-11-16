@@ -25,7 +25,10 @@ book:
     - href: index.qmd
       text: "Introduction"
     - part: research/index.qmd
-      chapters: []
+      chapters:
+        - research/computational-plasma-dynamics-lab/index.qmd
+        - research/plasmawise/index.qmd
+        - research/rotating-detonation-engines-lab/index.qmd
     - part: courses/index.qmd
       chapters: []
     - part: coding/index.qmd

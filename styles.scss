@@ -221,3 +221,15 @@ main.content h1, main.content h2, main.content h3 { letter-spacing: -0.015em; }
 main.content > section.home-introduction > h1 {
   display: none;
 }
+
+/* Allow long research subsection names to wrap in the book sidebar. */
+#quarto-sidebar .sidebar-item-container,
+#quarto-sidebar .sidebar-item-text {
+  min-width: 0;
+}
+#quarto-sidebar .sidebar-item-text,
+#quarto-sidebar .sidebar-item-text .menu-text {
+  white-space: normal !important;
+  overflow-wrap: break-word;
+  word-break: normal;
+}
