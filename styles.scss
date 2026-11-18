@@ -270,3 +270,11 @@ main.content > section.home-introduction > h1 {
   margin-bottom: 0.2rem;
 }
 
+/* Compact spacing between a paragraph label and its following bullet list. */
+main.content p:has(+ ul) {
+  margin-bottom: 0.25rem;
+}
+
+main.content p + ul {
+  margin-top: 0;
+}
