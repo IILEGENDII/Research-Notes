@@ -73,7 +73,7 @@ def patch_lab(text: str, key: str, label: str) -> tuple[str, int]:
         # Hide the book chapter number in this nested navigation entry only.
         # Keep Quarto's original chapter numbering and cross-references intact.
         sibling = re.sub(
-            r'<span class="chapter-number">[^<]*</span>(?:&nbsp;|\\s)*',
+            r'<span class="chapter-number">[^<]*</span>(?:&nbsp;|\s)*',
             "",
             sibling,
             count=1,
