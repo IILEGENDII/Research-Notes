@@ -6,18 +6,21 @@
 
 **Silicon Fit Parameters**
 
-Gkeyll Effective Inelastic Parameters:
+Effective Inelastic Parameters:
+
 - deltahat_ts = 1.038089
 - Ehat_ts     = 149.012070 eV
 - s           = 1.493323
 
-Gkeyll Elastic Backscatter Parameters:
+Elastic Backscatter Parameters:
+
 - P1_inf = 1.064654e-36
 - P1_hat = 0.071221
 - E_hat  = 697.301234 eV
 - W      = 1572.185633 eV
 - p      = 0.994023
 
-Gkeyll Inelastic Spectrum Parameters:
+Inelastic Spectrum Parameters:
+
 - phi = 6.805312 eV
 - Chung-Everhart peak energy = 2.268437 eV
