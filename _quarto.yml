@@ -29,6 +29,7 @@ book:
         - research/computational-plasma-dynamics-lab/index.qmd
         - research/computational-plasma-dynamics-lab/derivations-for-collision-operators.qmd
         - research/plasmawise/index.qmd
+        - research/plasmawise/updates.qmd
         - research/rotating-detonation-engines-lab/index.qmd
     - part: courses/index.qmd
       chapters: []

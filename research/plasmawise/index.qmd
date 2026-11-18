@@ -1,1 +1,3 @@
 # PLASMAWISE {.unnumbered}
+
+[Updates](updates.qmd)

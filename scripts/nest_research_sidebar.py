@@ -114,6 +114,14 @@ def main() -> None:
     pages = sorted(output.rglob('*.html'))
     if not pages:
         raise SystemExit('No Quarto HTML files found')
+    # Detect how many labs actually have published note pages.
+    # This scales automatically when another lab gains its first note.
+    expected_groups = sum(
+        any(page.name != 'index.html' for page in (output / 'research' / key).glob('*.html'))
+        for key in LABS
+    )
+    if expected_groups == 0:
+        raise RuntimeError('No lab note pages found in book output')
     patched = 0
     for page in pages:
         original = page.read_text(encoding='utf-8')
@@ -125,8 +133,8 @@ def main() -> None:
         if updated != original:
             page.write_text(updated, encoding='utf-8')
             patched += 1
-        if groups != 1:
-            raise RuntimeError(f'{page}: expected 1 nested lab group, found {groups}')
+        if groups != expected_groups:
+            raise RuntimeError(f'{page}: expected {expected_groups} nested lab groups, found {groups}')
     print(f'Nested lab notes successfully in {patched}/{len(pages)} HTML pages')
     if patched != len(pages):
         raise RuntimeError('Not all pages received sidebar nesting')
