@@ -270,12 +270,3 @@ main.content > section.home-introduction > h1 {
   margin-bottom: 0.2rem;
 }
 
-/* Hide chapter number in displayed page headings without changing Quarto cross-references. */
-#title-block-header .quarto-title h1.title > .chapter-number {
-  display: none;
-}
-/* The nonbreaking-space separator is rendered as a text node after the number.
-   Keep the title type size unchanged and offset only that tiny leading space. */
-#title-block-header .quarto-title h1.title > .chapter-title {
-  margin-left: -0.15em;
-}

@@ -45,7 +45,7 @@ format:
       - styles.scss
     toc: true
     toc-depth: 3
-    number-sections: true
+    number-sections: false
     code-copy: true
     html-math-method: mathjax
     link-external-newwindow: true
