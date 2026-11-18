@@ -49,7 +49,6 @@ format:
     html-math-method: mathjax
     link-external-newwindow: true
     include-in-header: translate-current-page.html
-    include-after-body: nested-research-navigation.html
 
 execute:
   freeze: auto

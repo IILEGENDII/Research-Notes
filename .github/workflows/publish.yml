@@ -24,6 +24,8 @@ jobs:
       - uses: quarto-dev/quarto-actions/setup@v2
       - name: Render research notes
         run: quarto render --to html
+      - name: Nest lab notes under collapsible sidebar sections
+        run: python3 scripts/nest_research_sidebar.py _book
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
