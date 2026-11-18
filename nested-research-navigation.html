@@ -1,63 +1,81 @@
 <script>
-/* Allow labs to expand/collapse within Quarto Book's chapter sidebar.
-   Parts are not nested in the book chapter model: organize their HTML links here
-   while retaining book cross-references and chapter ordering. */
+/* Nested, collapsible lab navigation for the Quarto Book sidebar.
+ * Quarto Book chapters remain unchanged; this groups each lab's note links
+ * beneath its lab landing page. Closed by default on a first visit.
+ */
 (function () {
   "use strict";
-  const labSections = [
+  const labs = [
     { directory: "/research/computational-plasma-dynamics-lab/", label: "Computational Plasma Dynamics Lab", key: "computational-plasma-dynamics-lab" },
     { directory: "/research/plasmawise/", label: "PLASMAWISE", key: "plasmawise" },
     { directory: "/research/rotating-detonation-engines-lab/", label: "Rotating Detonation Engines Lab", key: "rotating-detonation-engines-lab" }
   ];
-  function getPath(anchor) {
-    try { return new URL(anchor.href, document.baseURI).pathname; }
+  function linkPath(link) {
+    try { return new URL(link.href, document.baseURI).pathname; }
     catch (_) { return ""; }
   }
-  function setup() {
-    const menu = document.querySelector("#quarto-sidebar .sidebar-menu-container");
-    if (!menu) return;
-    for (const lab of labSections) {
-      const anchors = menu.querySelectorAll("li.sidebar-item > .sidebar-item-container > a.sidebar-link");
-      const labLink = Array.from(anchors).find(a => getPath(a).endsWith(lab.directory + "index.html"));
+  function initialize() {
+    const sidebar = document.querySelector("#quarto-sidebar .sidebar-menu-container");
+    if (!sidebar) return;
+    for (const lab of labs) {
+      const links = sidebar.querySelectorAll("li.sidebar-item > .sidebar-item-container > a.sidebar-link");
+      const labLink = Array.from(links).find(link => linkPath(link).endsWith(lab.directory + "index.html"));
       if (!labLink) continue;
       const labItem = labLink.closest("li.sidebar-item");
-      if (!labItem || labItem.classList.contains("sidebar-item-section")) continue;
-      const childItems = [];
+      if (!labItem || labItem.dataset.labMenuInitialized === "true") continue;
+
+      const notes = [];
       let sibling = labItem.nextElementSibling;
       while (sibling && sibling.matches("li.sidebar-item")) {
-        const link = sibling.querySelector(":scope > .sidebar-item-container > a.sidebar-link");
-        const url = link ? getPath(link) : "";
-        if (!url.includes(lab.directory) || url.endsWith(lab.directory + "index.html")) break;
-        childItems.push(sibling);
+        const noteLink = sibling.querySelector(":scope > .sidebar-item-container > a.sidebar-link");
+        const path = noteLink ? linkPath(noteLink) : "";
+        if (!path.includes(lab.directory) || path.endsWith(lab.directory + "index.html")) break;
+        notes.push(sibling);
         sibling = sibling.nextElementSibling;
       }
-      if (childItems.length === 0) continue;
+      if (!notes.length) continue;
       const container = labItem.querySelector(":scope > .sidebar-item-container");
       const title = container && container.querySelector(".menu-text");
       if (!container || !title) continue;
-      const id = "quarto-lab-section-" + lab.key;
+
+      const id = "research-lab-notes-" + lab.key;
       title.id = id + "-label";
-      const expanded = labLink.classList.contains("active") || childItems.some(item => !!item.querySelector("a.sidebar-link.active"));
       const list = document.createElement("ul");
       list.id = id;
-      list.className = "collapse list-unstyled sidebar-section depth2" + (expanded ? " show" : "");
+      list.className = "list-unstyled sidebar-section depth2 research-lab-children";
       list.setAttribute("aria-labelledby", title.id);
-      for (const child of childItems) list.appendChild(child);
+      notes.forEach(note => list.appendChild(note));
+
       const toggle = document.createElement("button");
       toggle.type = "button";
-      toggle.className = "sidebar-item-toggle text-start";
-      toggle.setAttribute("data-bs-toggle", "collapse");
-      toggle.setAttribute("data-bs-target", "#" + id);
+      toggle.className = "sidebar-item-toggle research-lab-toggle";
       toggle.setAttribute("aria-controls", id);
-      toggle.setAttribute("aria-expanded", String(expanded));
-      toggle.setAttribute("aria-label", "Toggle section: " + lab.label);
-      toggle.innerHTML = '<i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>';
-      labItem.classList.add("sidebar-item-section");
+      toggle.setAttribute("aria-label", "Show or hide notes under " + lab.label);
+      toggle.innerHTML = '<i class="bi bi-chevron-right" aria-hidden="true"></i>';
+
+      const storageKey = "philosophia-naturalis:lab-menu:" + lab.key;
+      let initiallyOpen = false;
+      try { initiallyOpen = sessionStorage.getItem(storageKey) === "open"; } catch (_) {}
+      function setOpen(open) {
+        list.hidden = !open;
+        toggle.setAttribute("aria-expanded", String(open));
+      }
+      setOpen(initiallyOpen);
+      toggle.addEventListener("click", function () {
+        const open = list.hidden;
+        setOpen(open);
+        try { sessionStorage.setItem(storageKey, open ? "open" : "closed"); } catch (_) {}
+      });
+
+      labItem.classList.add("sidebar-item-section", "research-lab-item");
+      labItem.dataset.labMenuInitialized = "true";
       container.appendChild(toggle);
       labItem.appendChild(list);
     }
   }
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", setup);
-  else setup();
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initialize);
+  else initialize();
+  window.addEventListener("load", initialize);
+  window.addEventListener("pageshow", initialize);
 })();
 </script>

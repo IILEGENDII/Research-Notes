@@ -233,3 +233,39 @@ main.content > section.home-introduction > h1 {
   overflow-wrap: break-word;
   word-break: normal;
 }
+
+/* Collapsible lab note groups nested beneath the Research part. */
+#quarto-sidebar .research-lab-item > .sidebar-item-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.2rem;
+}
+#quarto-sidebar .research-lab-item > .sidebar-item-container > a.sidebar-link {
+  flex: 1 1 auto;
+  min-width: 0;
+  white-space: normal;
+}
+#quarto-sidebar .research-lab-item > .sidebar-item-container > .research-lab-toggle {
+  flex: 0 0 1.45rem;
+  min-width: 1.45rem;
+  min-height: 1.45rem;
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
+  cursor: pointer;
+}
+#quarto-sidebar .research-lab-item > .sidebar-item-container > .research-lab-toggle .bi {
+  font-size: 0.7rem;
+}
+#quarto-sidebar .research-lab-toggle[aria-expanded="true"] .bi-chevron-right::before {
+  transform: rotate(90deg);
+}
+#quarto-sidebar .research-lab-children[hidden] {
+  display: none !important;
+}
+#quarto-sidebar .research-lab-children {
+  padding-left: 0.75rem;
+  margin-bottom: 0.2rem;
+}
