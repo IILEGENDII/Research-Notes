@@ -70,6 +70,14 @@ def patch_lab(text: str, key: str, label: str) -> tuple[str, int]:
         href = href_in(sibling)
         if "/research/" + key + "/" not in href or href.endswith("/index.html"):
             break
+        # Hide the book chapter number in this nested navigation entry only.
+        # Keep Quarto's original chapter numbering and cross-references intact.
+        sibling = re.sub(
+            r'<span class="chapter-number">[^<]*</span>(?:&nbsp;|\\s)*',
+            "",
+            sibling,
+            count=1,
+        )
         found.append(sibling)
         pos = end
     if not found:
