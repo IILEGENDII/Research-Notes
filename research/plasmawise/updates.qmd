@@ -24,3 +24,11 @@ Inelastic Spectrum Parameters:
 
 - phi = 6.805312 eV
 - Chung-Everhart peak energy = 2.268437 eV
+
+
+**Silicon First Run**
+
+- $T_e = T_i =$ 2.0 keV
+- $n_e = n_i =$ 3.5e21
+- fixed_temp_relax = true
+
