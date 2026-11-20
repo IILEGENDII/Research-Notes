@@ -32,3 +32,11 @@ Inelastic Spectrum Parameters:
 - $n_e = n_i =$ 3.5e21
 - fixed_temp_relax = true
 
+### November 20, 2026
+
+Next steps for Helion
+
+- Find bounds for different parameters for materials in literature, implement into Nebula to find upper and lower bounds for emission
+- Start with 3C SiC
+
+
