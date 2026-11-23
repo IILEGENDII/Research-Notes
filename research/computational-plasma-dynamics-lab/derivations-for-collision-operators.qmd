@@ -21,11 +21,11 @@ Consider the collision between two particles of same mass, represented as hard s
 We assume that the collision process is localized in spacetime (i.e. takes place at a single point in space and time, and the only interaction between the two particles happens at the location and time of the collision) and perfectly elastic (preserve both momentum and kinetic energy). We can then write the post-collision momenta as 
 
 \begin{align}
-  v' &= \frac{v + v_*}{2} + \frac{|v - v_*|}{2} \matbf{\sigma} \\
-  v'_* &= \frac{v + v_*}{2} - \frac{|v - v_*|}{2} \matbf{\sigma}
+  v' &= \frac{v + v_*}{2} + \frac{|v - v_*|}{2} \mathbf{\sigma} \\
+  v'_* &= \frac{v + v_*}{2} - \frac{|v - v_*|}{2} \mathbf{\sigma}
 \end{align}
 
-where $\matbf{\sigma}$ is a unit vector describing post-collision direction of the relative velocities between the two particles. Mores specifically, from the center of the collision sphere $\frac{v + v_*}{2}$, $\matbf{\sigma}$ points toward $v'$ and $-\matbf{\sigma}$ points toward $v'_*$.
+where $\mathbf{\sigma}$ is a unit vector describing post-collision direction of the relative velocities between the two particles. Mores specifically, from the center of the collision sphere $\frac{v + v_*}{2}$, $\mathbf{\sigma}$ points toward $v'$ and $-\mathbf{\sigma}$ points toward $v'_*$.
 
 We then introduce the two-particle distribution function, $P^{(2)}(x, x_*, v, v_*, t)$, which describes the probability density of finding, at time $t$, the first particle at location $(x, v)$ and $(x_*, v_*)$.
 
