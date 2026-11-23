@@ -1,543 +1,396 @@
-# Derivations for Collision Operators
+# Derivations for Collision Operators 
 
-## Boltzmann Operator
+## Setup
+Let $P(x, v, t)$ be the particle distribution function in 6-dimensional phase space. The 6-dimensional analogue of the continuity equation holds. Assuming no external forces or collisions, the continuity is described by:
 
-### Setup
+\begin{equation}
+  \partial_t P + v \cdot \nabla_x P = 0
+\end{equation}
 
-Let $P(t,\mathbf{x},\mathbf{v})$ be the one-particle distribution function in six-dimensional phase space. Here, $\mathbf{x}\in\mathbb{R}^3$ is position, $\mathbf{v}\in\mathbb{R}^3$ is velocity, and $t$ is time. If $P$ is normalized as a probability density, then $P\,d^3\mathbf{x}\,d^3\mathbf{v}$ is the probability of finding a particular particle in a small region of phase space. Multiplying by the total number of particles gives the expected number of particles in that region.
+In the presence of collisions, we adjust the RHS, adding a gain term and a loss term that represents the inflow and outflow of the particles, respectively, into a certain location in phase space:
 
-Rather than tracking the trajectory of every particle, our goal is to find an equation describing how the distribution changes with time.
+\begin{equation}
+  \partial_t P + v \cdot \nabla_x P = G - L
+\end{equation}
 
-#### Motion without collisions
+The goal of collision operators is to derive and understand the form of $G$ and $L$. We begin by deriving the Boltzmann operator, and then making additional assumptions for simplified models.
 
-We first assume that particles undergo no collisions and experience no external forces. Each particle moves with a constant velocity, so over a short time interval $dt$, its position changes by $\mathbf{v}\,dt$ while its velocity remains unchanged.
+### Boltzmann Operator
+Consider the collision between two particles of same mass, represented as hard spheres. Let $(x, v)$ and $(x_*, v_*)$ be the phase space coordinates, respectively, of the first and the second particle before the collision, and likewise $(x', v')$ and $(x'_*, v'_*)$ be the coordinates of the first and second particles, respectively, after the collision.
 
-The distribution is therefore transported through position space without being created or destroyed. The corresponding continuity equation is
+We assume that the collision process is localized in spacetime (i.e. takes place at a single point in space and time, and the only interaction between the two particles happens at the location and time of the collision) and perfectly elastic (preserve both momentum and kinetic energy). We can then write the post-collision momenta as 
 
-$$
-\frac{\partial P}{\partial t}
-+\mathbf{v}\cdot\nabla_{\mathbf{x}}P=0.
-$$
+\begin{align}
+  v' &= \frac{v + v_*}{2} + \frac{|v - v_*|}{2} \boldsymbol{\sigma} \\
+  v'_* &= \frac{v + v_*}{2} - \frac{|v - v_*|}{2} \boldsymbol{\sigma}
+\end{align}
 
-To see where this comes from, follow a particle along its trajectory. Since the distribution is unchanged along the trajectory, its total derivative is zero:
+where $\boldsymbol{\sigma}$ is a unit vector describing post-collision direction of the relative velocities between the two particles. Mores specifically, from the center of the collision sphere $\frac{v + v_*}{2}$, $\boldsymbol{\sigma}$ points toward $v'$ and $-\boldsymbol{\sigma}$ points toward $v'_*$.
 
-$$
-\frac{dP}{dt}
-=\frac{\partial P}{\partial t}
-+\frac{d\mathbf{x}}{dt}\cdot\nabla_{\mathbf{x}}P
-+\frac{d\mathbf{v}}{dt}\cdot\nabla_{\mathbf{v}}P=0.
-$$
-
-Substituting $d\mathbf{x}/dt=\mathbf{v}$ and $d\mathbf{v}/dt=0$ gives the previous equation. This is called the *free-transport equation*.
-
-Collisions change the situation. A particle initially moving with one velocity may emerge with a different velocity. Although the particle is not destroyed, it leaves one region of velocity space and enters another. We therefore write
-
-$$
-\frac{\partial P}{\partial t}
-+\mathbf{v}\cdot\nabla_{\mathbf{x}}P=G-L,
-$$
-
-where $G$ is the rate at which collisions bring particles into a chosen phase-space region, and $L$ is the rate at which collisions remove them from it. The collision operator is the difference $G-L$.
-
-We will first derive these terms for elastic collisions between hard spheres. We can then identify which parts of the derivation remain valid for other interactions, particularly Coulomb collisions in plasmas.
+We then introduce the two-particle distribution function, $P^{(2)}(x, x_*, v, v_*, t)$, which describes the probability density of finding, at time $t$, the first particle at location $(x, v)$ and $(x_*, v_*)$.
 
 
-### The hard-sphere model
+#### The loss and gain terms
 
-Consider a large number $N$ of identical particles, each modeled as a sphere of radius $r$ and mass $m$. We make three assumptions:
+We first derive the loss term, $L$, which describes the number of particles that leave a given location in phase space due to collisions.
 
-- The gas is sufficiently dilute that interactions involving two particles at a time dominate over simultaneous collisions among three or more particles.
-- The particles move freely between collisions.
-- A collision is localized in space and time and is perfectly elastic, so total momentum and kinetic energy are conserved.
+Consider the first particle at location $(x,v)$. For simplicity, we change our reference frame so that this particle is stationary. The second particle then moves with relative velocity $v_*-v$.
 
-The hard-sphere model gives us a particularly simple way to count collisions. It is not an assumption that charged particles in a plasma literally behave as rigid spheres; we will replace this interaction model later.
+Since both particles have radius $r$, they collide when their centers are separated by $2r$. We can therefore simplify the geometry by treating the first particle as a sphere of radius $2r$ and the second particle as a point.
 
-### Velocities before and after a collision
+Let $n$ be a unit vector pointing from the first particle's center toward the second particle at the moment of collision. The second particle must then be at position $x_*=x+2rn$.
 
-Let the two particles have velocities $\mathbf{v}$ and $\mathbf{v}_*$ before a collision, and $\mathbf{v}'$ and $\mathbf{v}'_*$ afterward. The subscript $*$ distinguishes the second particle, while the prime indicates the other side of the collision.
-
-Because the two particles have equal masses, conservation of momentum gives
+We want to count how many particles reach a small area of the sphere during a short interval $dt$. The area of a small patch on the sphere of radius $2r$ is
 
 $$
-m\mathbf{v}+m\mathbf{v}_*
-=m\mathbf{v}'+m\mathbf{v}'_*.
+dA=(2r)^2\,dn,
 $$
 
-Conservation of kinetic energy gives
+where $dn$ represents an infinitesimal solid angle, rather than a change in the length of $n$.
+
+The velocity of the second particle relative to the first is $v_*-v$. Only the component perpendicular to the surface patch can cause a particle to cross that patch. Thus, in time $dt$, the particles capable of hitting the patch must lie within a volume
 
 $$
-\frac{m}{2}|\mathbf{v}|^2+\frac{m}{2}|\mathbf{v}_*|^2
-=\frac{m}{2}|\mathbf{v}'|^2+\frac{m}{2}|\mathbf{v}'_*|^2.
+dV=|(v_*-v)\cdot n|(2r)^2\,dn\,dt.
 $$
 
-The common factors of $m$ cancel. We now introduce the center-of-mass velocity $\mathbf{V}$ and relative velocity $\mathbf{g}$:
+We use the absolute value because the volume must be positive. However, we count only particles that are approaching the first particle before the collision. Thus we restrict $n$ to the hemisphere
 
 $$
-\mathbf{V}=\frac{\mathbf{v}+\mathbf{v}_*}{2},
-\qquad
-\mathbf{g}=\mathbf{v}-\mathbf{v}_*.
+B_-=\{n\in S^2:(v_*-v)\cdot n<0\}.
 $$
 
-We can recover either particle's velocity from these definitions:
-
-$$
-\mathbf{v}=\mathbf{V}+\frac{\mathbf{g}}{2},
-\qquad
-\mathbf{v}_*=\mathbf{V}-\frac{\mathbf{g}}{2}.
-$$
-
-Momentum conservation states that $\mathbf{V}'=\mathbf{V}$. To understand the remaining energy constraint, substitute the last two expressions into the sum of the squared speeds:
+Multiplying the volume by the probability density of finding the two particles at the required positions and velocities gives the expected number of collisions for one fixed pair of particles. Since the first particle can collide with any of the other $N-1$ particles, we multiply by $N-1$ and integrate over all possible velocities of the second particle and all allowed collision directions:
 
 $$
 \begin{aligned}
-|\mathbf{v}|^2+|\mathbf{v}_*|^2
-&=\left|\mathbf{V}+\frac{\mathbf{g}}{2}\right|^2
- +\left|\mathbf{V}-\frac{\mathbf{g}}{2}\right|^2\\
-&=2|\mathbf{V}|^2+\frac{|\mathbf{g}|^2}{2}.
+L={}&(N-1)(2r)^2
+\int_{\mathbb{R}^3}\int_{B_-}
+P^{(2)}(x,x+2rn,v,v_*,t)\\
+&\qquad\qquad \times |(v_*-v)\cdot n|\,dn\,dv_*.
 \end{aligned}
 $$
 
-Since $\mathbf{V}$ is unchanged, kinetic-energy conservation requires $|\mathbf{g}'|=|\mathbf{g}|$. Thus an elastic collision **preserves the center-of-mass velocity and the magnitude of the relative velocity**. Only the direction of the relative velocity can change.
+The loss term therefore consists of three parts: the probability of finding a pair of particles in a position to collide, the rate at which the particles approach one another, and the number of possible collision partners.
 
-We can express that direction with a unit vector $\boldsymbol{\sigma}\in\mathbb{S}^2$, where $|\boldsymbol{\sigma}|=1$ and $\mathbb{S}^2$ is the unit sphere of directions in three dimensions. Writing $\mathbf{g}'=|\mathbf{g}|\boldsymbol{\sigma}$ gives
+We now consider the gain term, $G$, which counts particles entering the velocity state $v$ after a collision.
+
+The geometry is almost identical. The main difference is that the particles are moving away from each other after collision, so the relevant hemisphere is
+
+$$
+B_+=\{n\in S^2:(v_*-v)\cdot n>0\}.
+$$
+
+The collision process is reversible, and we assume that the two-particle distribution is continuous across the collision. Thus, the distribution of a pair at the instant of collision can be expressed using the velocities on the other side of that collision. We then change the collision direction from $n$ to $-n$, allowing us to write the gain term over the same hemisphere $B_-$ as the loss term:
 
 $$
 \begin{aligned}
-\mathbf{v}'
-&=\frac{\mathbf{v}+\mathbf{v}_*}{2}
- +\frac{|\mathbf{v}-\mathbf{v}_*|}{2}\boldsymbol{\sigma},\\[4pt]
-\mathbf{v}'_*
-&=\frac{\mathbf{v}+\mathbf{v}_*}{2}
- -\frac{|\mathbf{v}-\mathbf{v}_*|}{2}\boldsymbol{\sigma}.
+G={}&(N-1)(2r)^2
+\int_{\mathbb{R}^3}\int_{B_-}
+P^{(2)}(x,x+2rn,v',v'_*,t)\\
+&\qquad\qquad \times |(v_*-v)\cdot n|\,dn\,dv_*.
 \end{aligned}
 $$
 
-These are the post-collision velocities in the **$\boldsymbol{\sigma}$-representation**. In velocity space, the two particles lie on opposite sides of the same center $\mathbf{V}$, at distance $|\mathbf{g}|/2$ from it. A collision rotates the line joining those velocities without changing its length.
+The difference between $G$ and $L$ is now in the distribution functions. The loss term considers particles that start with velocities $(v,v_*)$, while the gain term considers the pairs related to them through a collision.
 
-As a simple example, in a head-on one-dimensional collision of two identical spheres, the relative velocity reverses direction. The two spheres exchange velocities. In three dimensions, the outgoing direction need not be exactly opposite the incoming one.
+#### The Boltzmann–Grad limit
 
-### The collision normal
+The expressions above still depend on the radius of the particles and the total number of particles. We now consider a scaling limit in which $N$ becomes large while $r$ becomes small.
 
-There is another useful way to describe a hard-sphere collision. Two spheres of radius $r$ touch when their centers are separated by $d=2r$. Let $\mathbf{n}$ be the unit vector pointing from the center of the first sphere toward the center of the second at the instant of contact.
+We assume that the gas is sufficiently dilute that simultaneous collisions involving three or more particles can be neglected. In the scaling used here, this is expressed by
 
-The component of relative velocity along this line changes sign during an elastic collision, while the perpendicular component remains unchanged. Thus
+$$
+Nr^3\ll1,\qquad Nr^2\sim1.
+$$
+
+The first condition means that the total volume occupied by the particles is small. The second ensures that the total collision rate remains appreciable even as the particles become smaller.
+
+More specifically, we take $N\to\infty$ and $r\to0$ while keeping $Nr^2$ finite. This is known as the *Boltzmann–Grad limit*.
+
+Since the separation between the two particles at contact is $2r$, the positions $x$ and $x+2rn$ become effectively the same in this limit. Absorbing the remaining geometric constant into $C$, we obtain
+
+$$
+L\approx C\int_{\mathbb{R}^3}\int_{B_-}
+P^{(2)}(x,x,v,v_*,t)
+|(v_*-v)\cdot n|\,dn\,dv_*
+$$
+
+and
+
+$$
+G\approx C\int_{\mathbb{R}^3}\int_{B_-}
+P^{(2)}(x,x,v',v'_*,t)
+|(v_*-v)\cdot n|\,dn\,dv_*.
+$$
+
+This limit simplifies the collision geometry, but the equations are still not closed: we are trying to determine the one-particle distribution $P$, yet both collision terms depend on the two-particle distribution $P^{(2)}$.
+
+#### The molecular chaos assumption
+
+We therefore need an assumption relating the two-particle distribution to the one-particle distribution.
+
+The main idea is that, in a dilute gas with many particles, a collision between any particular pair is a relatively rare event. We assume that the positions and velocities of particles that are about to collide are approximately uncorrelated. This is the *molecular chaos assumption*.
+
+For particles before collision, this allows us to write
+
+$$
+P^{(2)}(x,x_*,v,v_*,t)
+\approx P(x,v,t)P(x_*,v_*,t).
+$$
+
+In other words, the joint probability density is approximated by the product of the individual probability densities.
+
+This assumption is not strictly true for every pair of particles. In particular, two particles emerging from a collision cannot have completely independent velocities, since their velocities must obey conservation of momentum and energy. The approximation is instead used for particles before collision, with the correlations introduced by individual collisions becoming negligible in the scaling limit.
+
+For the loss term, we can directly substitute this approximation:
+
+$$
+L\approx C\int_{\mathbb{R}^3}\int_{B_-}
+P(x,v,t)P(x,v_*,t)
+|(v_*-v)\cdot n|\,dn\,dv_*.
+$$
+
+For the gain term, we use the assumed continuity of the pair distribution at a collision and the reversibility of elastic collisions, as discussed above, before applying molecular chaos. This gives
+
+$$
+G\approx C\int_{\mathbb{R}^3}\int_{B_-}
+P(x,v',t)P(x,v'_*,t)
+|(v_*-v)\cdot n|\,dn\,dv_*.
+$$
+
+We now have expressions for both $G$ and $L$ in terms of the one-particle distribution alone.
+
+#### The Boltzmann equation
+
+Substituting the gain and loss terms into our original transport equation, absorbing the constant $C$ by a rescaling, and writing $f$ instead of $P$, we obtain
+
+$$
+\partial_t f+v\cdot\nabla_x f
+=\int_{\mathbb{R}^3}\int_{B_-}
+(f'f'_* - ff_*)|(v_*-v)\cdot n|\,dn\,dv_*.
+$$
+
+Here we use the shorthand
 
 $$
 \begin{aligned}
-\mathbf{v}'
-&=\mathbf{v}-[(\mathbf{v}-\mathbf{v}_*)\cdot\mathbf{n}]\mathbf{n},\\
-\mathbf{v}'_*
-&=\mathbf{v}_*+[(\mathbf{v}-\mathbf{v}_*)\cdot\mathbf{n}]\mathbf{n}.
+f&=f(x,v,t),&
+f_*&=f(x,v_*,t),\\
+f'&=f(x,v',t),&
+f'_*&=f(x,v'_*,t).
 \end{aligned}
 $$
 
-For particles moving toward each other at contact, $(\mathbf{v}-\mathbf{v}_*)\cdot\mathbf{n}>0$. The two formulas above conserve both the sum of the velocities and the sum of their squared magnitudes.
+The term $f'f'_*$ represents the gain of particles with velocity $v$, while $ff_*$ represents their loss.
 
-The vectors $\mathbf{n}$ and $\boldsymbol{\sigma}$ have different meanings. The first specifies the line of centers at impact; the second specifies the outgoing relative-velocity direction. Either description contains the collision geometry, but the corresponding angular integration variables are not the same.
+We have derived this form for elastic collisions between hard spheres. However, the same structure may be used for other types of particle interactions by changing the factor that describes the rate and geometry of collisions.
 
-### The two-particle distribution
+We therefore introduce the *collision kernel*, $B$, which contains the dependence on the interaction being considered. The general Boltzmann equation can then be written as
 
-To count collisions, we must know how likely it is to find *two* particles near each other. We therefore introduce the two-particle distribution $P^{(2)}(t,\mathbf{x},\mathbf{x}_*,\mathbf{v},\mathbf{v}_*)$. It describes the joint probability density for one specified particle to have coordinates $(\mathbf{x},\mathbf{v})$ and another specified particle to have $(\mathbf{x}_*,\mathbf{v}_*)$.
+$$
+\partial_t f+v\cdot\nabla_x f
+=\int_{\mathbb{R}^3}\int_{S^2}
+(f'f'_* - ff_*)B(n,|v-v_*|)\,dn\,dv_*.
+$$ {#eq-general-boltzmann}
 
-This is more information than the one-particle distribution $P$. Knowing the probability of finding each particle separately does not, by itself, tell us how strongly their positions or velocities are correlated. For instance, particles that have just collided have correlated outgoing velocities because they must satisfy the conservation laws.
+The right-hand side is called the *Boltzmann collision operator*, commonly written as
 
-For the moment, we leave $P^{(2)}$ unknown and use it to derive the collision rates.
+$$
+Q(f,f)(v)=
+\int_{\mathbb{R}^3}\int_{S^2}
+(f'f'_* - ff_*)B(n,|v-v_*|)\,dn\,dv_*.
+$$
 
-### Counting particles leaving a velocity state
+The collision kernel depends on the physical interaction. For hard spheres, its geometrical factor is related to the incoming relative velocity projected onto the collision normal. For classical Coulomb interactions, the kernel can have a very different dependence on relative speed and collision angle, including a strong dependence on small-angle scattering.
 
-Fix the first particle at position $\mathbf{x}$ with velocity $\mathbf{v}$. We want to count how often another particle collides with it, causing it to leave a small region around $\mathbf{v}$.
+The collision integral is five-dimensional: the integral over $v_*$ has three velocity components, while $n\in S^2$ has two independent angular coordinates. We integrate over the possible velocities of the collision partner and over the possible collision directions. We do not integrate over $x$ because the collision is assumed to take place locally at the same position.
 
-It is simplest to work in the reference frame moving with the first particle. In this frame, the second particle approaches with relative velocity $\mathbf{v}_*-\mathbf{v}$. We may also treat the first particle as a sphere of radius $d=2r$ and the second as a point. This changes neither the condition for contact nor the number of collisions.
+#### Basic properties of the Boltzmann equation
 
-Consider a small patch on the contact sphere, whose outward normal is $\mathbf{n}$ and whose area is $dA=d^2\,d\Omega_{\mathbf{n}}$. Here $d\Omega_{\mathbf{n}}$ is an element of solid angle. During a short interval $dt$, only particles in a thin volume swept toward that patch can cross it. That volume is
+##### Collision invariants
+
+We now consider quantities that remain unchanged by collisions.
+
+For a given function $\phi(v)$, we can take a velocity moment of the collision operator:
+
+$$
+\int_{\mathbb{R}^3}Q(f,f)(v)\phi(v)\,dv.
+$$
+
+The collision integral is symmetric when we exchange the two particles, and it changes sign when we exchange pre-collision and post-collision velocities. By averaging the equivalent expressions, we obtain
 
 $$
 \begin{aligned}
-dV_{\mathrm{hit}}
-&=\big| (\mathbf{v}_*-\mathbf{v})\cdot\mathbf{n}\big|\,dA\,dt\\
-&=d^2\big|(\mathbf{v}_*-\mathbf{v})\cdot\mathbf{n}\big|\,d\Omega_{\mathbf{n}}\,dt.
+&\int_{\mathbb{R}^3}Q(f,f)(v)\phi(v)\,dv\\
+&=\frac14\int_{\mathbb{R}^3}\int_{\mathbb{R}^3}\int_{S^2}
+(f'f'_*-ff_*)\\
+&\qquad\times(\phi+\phi_*-\phi'-\phi'_*)
+B(n,|v-v_*|)\,dn\,dv_*\,dv.
 \end{aligned}
 $$
 
-The dot product appears because only motion **perpendicular to the surface patch** carries particles through it. Motion parallel to the patch contributes no flux.
-
-We count only *approaching* particles, for which $(\mathbf{v}_*-\mathbf{v})\cdot\mathbf{n}<0$. Denote this incoming hemisphere by $\mathcal{B}_{-}$. At contact, the second particle's position is $\mathbf{x}_*=\mathbf{x}+d\mathbf{n}$. Multiplying the swept volume by the pair distribution, summing over the $N-1$ possible partners, and integrating over partner velocities and incoming directions gives
+If $\phi$ satisfies
 
 $$
-\begin{aligned}
-L(t,\mathbf{x},\mathbf{v})
-={}&(N-1)d^2
-\int_{\mathbb{R}^3}\!d^3\mathbf{v}_*
-\int_{\mathcal{B}_{-}}\!d\Omega_{\mathbf{n}}\\
-&\quad\times P^{(2)}(t,\mathbf{x},\mathbf{x}+d\mathbf{n},
-\mathbf{v},\mathbf{v}_*)
-\big|(\mathbf{v}_*-\mathbf{v})\cdot\mathbf{n}\big|.
-\end{aligned}
+\phi+\phi_*=\phi'+\phi'_*,
 $$
 
-This is the **loss term**. Its structure is a straightforward count: probability of a pair at contact, multiplied by the volume swept through the contact surface per unit time, summed over all possible collision partners.
+then the term in parentheses is zero, and consequently the entire velocity moment vanishes.
 
-### Counting particles entering a velocity state
-
-We now want the reverse count: collisions that produce a particle with velocity $\mathbf{v}$ even though that particle had a different velocity immediately beforehand.
-
-For an elastic collision, the map between incoming and outgoing velocity pairs is reversible. Applying the same collision rule twice returns the original pair. Therefore, to find the **gain term**, we count the velocity pairs that would be transformed into $(\mathbf{v},\mathbf{v}_*)$ by the inverse collision.
-
-Using the same incoming hemisphere after changing the collision normal $\mathbf{n}\mapsto-\mathbf{n}$, we obtain an integral with the same geometrical factor as the loss term but with the pair distribution evaluated at the corresponding pre-collision velocities:
+Such a function is called a *collision invariant*. For elastic collisions, the collision invariants can be written as
 
 $$
-\begin{aligned}
-G(t,\mathbf{x},\mathbf{v})
-={}&(N-1)d^2
-\int_{\mathbb{R}^3}\!d^3\mathbf{v}_*
-\int_{\mathcal{B}_{-}}\!d\Omega_{\mathbf{n}}\\
-&\quad\times P^{(2)}(t,\mathbf{x},\mathbf{x}+d\mathbf{n},
-\mathbf{v}',\mathbf{v}'_*)
-\big|(\mathbf{v}_*-\mathbf{v})\cdot\mathbf{n}\big|.
-\end{aligned}
+\phi(v)=a+b\cdot v+c|v|^2,
 $$
 
-The primed velocities here identify the collision pair on the **opposite side of the reversible collision** from the pair whose final velocities we are counting. This convention is common in writing the gain-minus-loss operator. The essential idea is that the loss term counts particles leaving $\mathbf{v}$, while the gain term counts collisions capable of producing $\mathbf{v}$.
+where $a$ and $c$ are constants and $b$ is a constant vector.
 
-### Dilute-gas scaling and molecular chaos
+The three basic cases are $\phi=1$, $\phi=v$, and $\phi=|v|^2$. These correspond to conservation of particle number, momentum, and kinetic energy, respectively. Thus the collision operator does not create or destroy these quantities, even though collisions redistribute individual particle velocities.
 
-We still have a problem: our equation for the *one-particle* distribution contains the unknown *two-particle* distribution. We must find a way to express $P^{(2)}$ in terms of $P$.
+##### Boltzmann's H-functional
 
-First consider a very dilute gas. Let $d=2r$ be the collision diameter. In a fixed reference volume, the fraction of volume occupied by the spheres is small when $Nd^3\ll1$. Yet the total collision cross-sectional scale is proportional to $Nd^2$. The **Boltzmann–Grad limit** formalizes this situation by taking $N\to\infty$ and $d\to0$ while keeping $Nd^2$ finite. Particles become effectively point-like, but collisions do not disappear.
-
-In this limit we replace $\mathbf{x}+d\mathbf{n}$ by $\mathbf{x}$ in the distributions, up to corrections that vanish as $d\to0$ under suitable regularity assumptions. The geometric prefactor approaches a finite constant after the appropriate normalization.
-
-The second simplification is the **molecular chaos assumption**. We assume that the velocities of particles *about to collide* are approximately uncorrelated. Thus, for incoming pairs,
+We next consider the case $\phi=\log f$. Substituting this into the expression for the velocity moment gives
 
 $$
-P^{(2)}(t,\mathbf{x},\mathbf{x},\mathbf{v},\mathbf{v}_*)
-\approx P(t,\mathbf{x},\mathbf{v})P(t,\mathbf{x},\mathbf{v}_*).
+\phi+\phi_*-\phi'-\phi'_*
+=\log\left(\frac{ff_*}{f'f'_*}\right).
 $$
 
-The restriction to *incoming* pairs matters. A collision itself creates correlations between the outgoing particles, so it would be inconsistent to assume that every pair is independent at every instant. Molecular chaos neglects correlations between particles arriving at a collision from their previous histories; it does not claim that an individual collision has no effect on correlations.
-
-We can now replace the two-particle factors in the collision count by products of one-particle factors. We also switch from the probability density $P$ to a suitably scaled particle distribution $f$, absorbing the fixed normalization and hard-sphere geometric constants. For compactness, write
+The important property is that the logarithm is an increasing function. Thus, for any positive $a$ and $b$,
 
 $$
-f=f(t,\mathbf{x},\mathbf{v}),\qquad
-f_*=f(t,\mathbf{x},\mathbf{v}_*),\qquad
-f'=f(t,\mathbf{x},\mathbf{v}'),\qquad
-f_*'=f(t,\mathbf{x},\mathbf{v}_*').
+(a-b)\log\left(\frac{a}{b}\right)\geq0.
 $$
 
-The resulting **Boltzmann collision operator for hard spheres** takes the form
+Using this inequality with $a=ff_*$ and $b=f'f'_*$, we find
 
 $$
-Q(f,f)(\mathbf{v})
-=d^2\int_{\mathbb{R}^3}\!d^3\mathbf{v}_*
-\int_{\mathbb{S}^2}\!d\Omega_{\mathbf{n}}\,
-\big[(\mathbf{v}-\mathbf{v}_*)\cdot\mathbf{n}\big]_+
-\big(f'f_*'-ff_*\big),
+\int_{\mathbb{R}^3}Q(f,f)\log f\,dv\leq0.
 $$
 
-where $[a]_+=\max(a,0)$ selects approaching collisions. Depending on how the collision normal and angular domain are defined, the same operator may instead be written as an integral over one hemisphere with an absolute value.
-
-The kinetic equation has become **closed**: its right-hand side now depends only on $f$ itself.
-
-### The collision kernel
-
-The hard-sphere derivation made the collision rate look like a geometric flux. For different interactions, we need a more general way to encode how particles scatter.
-
-Let $\mathbf{g}=\mathbf{v}-\mathbf{v}_*$ and $g=|\mathbf{g}|$. Define $\chi$ as the angle between the incoming and outgoing relative-velocity directions, and let $\varphi$ specify the azimuthal orientation of the scattering plane. An element of scattering solid angle is
+We then define Boltzmann's *H-functional* as
 
 $$
-d\Omega=\sin\chi\,d\chi\,d\varphi.
+H=\int_{\mathbb{R}^3}f\log f\,dv.
 $$
 
-The **differential cross section** $d\sigma_{\mathrm{sc}}/d\Omega$ tells us how much effective collision area corresponds to a small range of outgoing directions. Multiplying by the relative speed converts this area into a collision-rate factor. We therefore define the collision kernel
+The collision contribution to the time derivative of $H$ is nonpositive. In the spatially homogeneous case considered below, this gives $dH/dt\leq0$ directly.
+
+This result is known as the *Boltzmann H-theorem*. It is related to the second law of thermodynamics, since the physical entropy is proportional to $-H$, up to normalization and additive constants.
+
+There is an interesting distinction here. The underlying elastic collision between two particles is reversible under Newtonian mechanics. However, the equation we derived for the distribution gives a preferred direction for the evolution of $H$. This is related to the statistical assumptions used in obtaining the Boltzmann equation, particularly molecular chaos.
+
+##### Maxwellian distributions
+
+We now ask what happens when equality holds in the Boltzmann inequality.
+
+In that case, $\log f$ must be a collision invariant. From our previous result, we therefore have
 
 $$
-B(g,\chi)=g\,\frac{d\sigma_{\mathrm{sc}}}{d\Omega}(g,\chi).
+\log f=a+b\cdot v+c|v|^2.
 $$
 
-For example, two hard spheres of radius $r$ have total geometrical cross section $\sigma_{\mathrm{tot}}=\pi(2r)^2=4\pi r^2$. Their differential cross section in the outgoing-direction representation is constant:
+Exponentiating,
 
 $$
-\frac{d\sigma_{\mathrm{sc}}}{d\Omega}=r^2,
-\qquad B(g,\chi)=r^2g.
+f(v)=\exp(a+b\cdot v+c|v|^2).
 $$
 
-The exact constant in a collision kernel depends on the normalization and angular convention, but the relative-speed and scattering-angle dependence determines the collision physics.
+For the distribution to be integrable over velocity space, we require $c<0$. Such a distribution is called a *Maxwellian distribution*.
 
-We can now write the **general elastic Boltzmann operator** as
+The collision term vanishes for a Maxwellian because the product $f'f'_*$ is equal to $ff_*$ for every elastic collision. Thus Maxwellians describe equilibrium distributions of the collision operator.
 
-$$
-Q(f,f)(\mathbf{v})
-=\int_{\mathbb{R}^3}\!d^3\mathbf{v}_*
-\int_{\mathbb{S}^2}\!d\Omega\,
-B(g,\chi)\big(f'f_*'-ff_*\big).
-$$ {#eq-boltzmann-operator}
-
-The full kinetic equation, without external forces, is consequently
+For a Maxwellian with zero mean velocity, normalized so that its integral over velocity space is one, we can express the distribution as
 
 $$
-\frac{\partial f}{\partial t}
-+\mathbf{v}\cdot\nabla_{\mathbf{x}}f
-=Q(f,f).
+f(v)=
+\left(\frac{m}{2\pi k_BT}\right)^{3/2}
+\exp\left(-\frac{m|v|^2}{2k_BT}\right),
 $$
 
-This is an **integro-differential equation**: derivatives describe transport, while integrals account for collisions with particles of many other velocities and scattering directions.
+where $m$ is the particle mass, $k_B$ is Boltzmann's constant, and $T$ is temperature.
 
-The collision integral has five integration variables: three components of $\mathbf{v}_*$ and two scattering angles, $\chi$ and $\varphi$. The position $\mathbf{x}$ is *not* integrated over because our collision model treats each interaction as localized at that position.
+The coefficient $m/(2k_BT)$ determines the width of the velocity distribution. A higher temperature corresponds to a wider distribution, meaning that the particles have a greater spread of kinetic energies.
 
-### Coulomb interactions
+#### The spatially homogeneous equation
 
-The collision formula was derived using hard spheres because their geometry makes the counting particularly simple. The same gain-minus-loss structure can be used for other kinds of binary interactions, but the collision kernel must describe the correct scattering physics.
-
-For example, two charged particles exert a Coulomb force on each other without ever touching. As they pass, the force bends their paths. The resulting scattering angle depends on their incoming relative speed and the way their trajectories approach each other.
-
-As discussed in Lee's notes, the corresponding classical Coulomb kernel has the schematic dependence
+The full Boltzmann equation includes the transport term $v\cdot\nabla_x f$, which describes particles moving through position space. We can simplify the problem by assuming that the distribution is uniform in space:
 
 $$
-B_{\mathrm{Coulomb}}(g,\chi)
-\propto \frac{1}{g^3\sin^4(\chi/2)},
+f(x,v,t)=f(v,t).
 $$
 
-where $g=|\mathbf{v}-\mathbf{v}_*|$ is relative speed and $\chi$ is the scattering angle. The proportionality leaves out constants that depend on the particles and the chosen scattering convention.
-
-The factor $\sin^{-4}(\chi/2)$ becomes very large for small angles. Thus Coulomb interactions differ substantially from hard spheres, even though the **Boltzmann integral still counts particles entering and leaving velocity states**. This example illustrates why the choice of collision kernel is an essential part of the physical model.
-
-### Basic Properties of the Boltzmann Operator
-
-#### Collision invariants
-
-Although collisions redistribute the velocities of particles, an elastic binary collision cannot change the total number of particles, their total momentum, or their total kinetic energy. We should therefore expect the Boltzmann collision operator to preserve these quantities.
-
-To show this, let $\psi(\mathbf{v})$ be any sufficiently smooth function of velocity. Multiplying the collision operator by $\psi$ and integrating over the first particle's velocity gives a *velocity moment*:
+Then $\nabla_x f=0$, and the equation reduces to
 
 $$
-\int_{\mathbb{R}^3}\psi(\mathbf{v})Q(f,f)(\mathbf{v})\,d^3\mathbf{v}.
+\partial_t f=Q(f,f).
 $$
 
-We now use two symmetries of elastic two-body collisions. First, exchanging the particle labels $\mathbf{v}\leftrightarrow\mathbf{v}_*$ does not change the collision count. Second, reversing an elastic collision exchanges the incoming and outgoing pairs while preserving the collision measure. Averaging the equivalent expressions produces the **weak form**:
+This is the *spatially homogeneous Boltzmann equation*. We are now studying only how collisions change the velocity distribution, without also tracking changes in the spatial distribution.
+
+Because the collision invariants have zero collision moments, the quantities corresponding to particle number, momentum, and kinetic energy are conserved:
 
 $$
-\begin{aligned}
-\int_{\mathbb{R}^3}\!\psi Q(f,f)\,d^3\mathbf{v}
-={}&\frac14\int_{\mathbb{R}^3}\!d^3\mathbf{v}
-\int_{\mathbb{R}^3}\!d^3\mathbf{v}_*
-\int_{\mathbb{S}^2}\!d\Omega\\
-&\times B(g,\chi)ff_*
-\left(\psi'+\psi_*'-\psi-\psi_*\right).
-\end{aligned}
+\partial_t M=0,\qquad
+\partial_t \mathcal{P}=0,\qquad
+\partial_t E=0.
 $$
 
-The factor $1/4$ comes from averaging the two particle-label choices and the incoming/outgoing descriptions. Here $\psi'=\psi(\mathbf{v}')$ and $\psi_*'=\psi(\mathbf{v}'_*)$.
-
-If a function satisfies
+Likewise, the H-theorem becomes
 
 $$
-\psi(\mathbf{v}')+\psi(\mathbf{v}'_*)
-=\psi(\mathbf{v})+\psi(\mathbf{v}_*)
+\partial_t H\leq0.
 $$
 
-for every allowed elastic collision, it is called a **collision invariant**. The weak form then vanishes because the bracket is zero for each collision.
+Thus the distribution can change over time, but it must do so while preserving these conserved quantities and satisfying the Boltzmann inequality.
 
-The fundamental collision invariants are
+In this setting, Maxwellian distributions are equilibrium solutions. A non-Maxwellian distribution may evolve through collisions toward equilibrium, although determining whether this occurs, and at what rate, requires additional mathematical analysis.
 
-$$
-\psi(\mathbf{v})=1,\qquad
-\psi(\mathbf{v})=\mathbf{v},\qquad
-\psi(\mathbf{v})=|\mathbf{v}|^2.
-$$
+#### Mathematical questions
 
-They correspond to conservation of particle number, momentum, and kinetic energy. More generally, sufficiently regular collision invariants have the form $a+\mathbf{b}\cdot\mathbf{v}+c|\mathbf{v}|^2$, with constant $a$, $\mathbf{b}$, and $c$.
+##### Well-posedness
 
-For a physical distribution normalized to number density, define
+We have derived an evolution equation for $f$. However, we must also ask whether a given initial distribution produces a solution, whether the solution is unique, and whether small changes in the initial distribution lead to small changes in the solution.
 
-$$
-\begin{aligned}
-n(t,\mathbf{x})&=\int_{\mathbb{R}^3}f\,d^3\mathbf{v},\\
-mn\mathbf{u}&=\int_{\mathbb{R}^3}m\mathbf{v}f\,d^3\mathbf{v},\\
-\mathcal{E}&=\int_{\mathbb{R}^3}\frac{m}{2}|\mathbf{v}|^2f\,d^3\mathbf{v}.
-\end{aligned}
-$$
+Together, these questions are known as *well-posedness*.
 
-These are particle density, momentum density, and total kinetic-energy density. The corresponding collision moments are exactly zero:
+They are difficult for the Boltzmann equation because the collision integral is nonlinear, and the behavior of the equation depends strongly on the collision kernel. Some kernels, particularly those associated with long-range interactions, can also have singularities that make the collision integral difficult to analyze.
 
-$$
-\int Q\,d^3\mathbf{v}=0,\quad
-\int m\mathbf{v}Q\,d^3\mathbf{v}=\mathbf{0},\quad
-\int\frac{m}{2}|\mathbf{v}|^2Q\,d^3\mathbf{v}=0.
-$$
+##### Boundary conditions
 
-The word *collisional* is essential here. These densities may still change locally because particles flow from one position to another. The collision terms themselves do not create or remove any of the conserved quantities.
+So far we have considered a gas extending through all of space. In a bounded domain, particles may reach a wall, and we must specify what happens at the boundary.
 
-#### Boltzmann's $H$-theorem
+One possible condition is *specular reflection*, in which the component of velocity normal to the surface reverses while the tangential component remains unchanged. Another is *bounce-back reflection*, in which the entire velocity reverses.
 
-Conservation laws tell us what collisions cannot change. We now ask whether there is a quantity that changes in a preferred direction as collisions redistribute the velocities.
+A more physical model for some surfaces is *Maxwellian diffusion*, in which particles are absorbed and re-emitted according to a probability distribution related to the temperature of the wall.
 
-Define the $H$-functional, for a positive distribution, by
+The governing Boltzmann equation remains largely the same in the interior, but its solution can depend strongly on the boundary condition.
 
-$$
-H[f]=\int_{\mathbb{R}^3}
- f\ln\left(\frac{f}{f_{\mathrm{ref}}}\right)d^3\mathbf{v},
-$$
+##### Trend to equilibrium
 
-where $f_{\mathrm{ref}}$ is a fixed reference value used to make the logarithm dimensionless. For a distribution normalized as a probability density, this is equivalent, up to a constant, to the familiar expression $\int f\ln f\,d^3\mathbf{v}$.
+The H-theorem suggests that collisions should drive the distribution toward a Maxwellian. However, proving that the distribution actually approaches such an equilibrium, and determining the rate of convergence, is a separate mathematical problem.
 
-The derivative of $f\ln f$ with respect to $f$ contains $\ln f+1$. Since the collision operator conserves particle number, the extra $1$ contributes nothing to the collision part of $dH/dt$. Thus, the collisional rate of change is controlled by $\int Q(f,f)\ln f\,d^3\mathbf{v}$.
+For a gas in a bounded domain, particles continue interacting as they move through the container, making relaxation toward equilibrium plausible under suitable conditions.
 
-Using the weak form and setting
+For a gas in unbounded space, some particles may instead travel far apart without undergoing many additional collisions. Their spatial dispersion becomes important, so the long-time behavior need not be described simply by convergence to a spatially uniform Maxwellian.
 
-$$
-A=ff_*,\qquad A'=f'f_*',
-$$
+##### Hydrodynamic limit
 
-we obtain
+The Boltzmann equation describes the statistical distribution of individual particle positions and velocities, while fluid equations describe macroscopic quantities such as density, momentum, and temperature.
 
-$$
-\left.\frac{dH}{dt}\right|_{\mathrm{coll}}
-=-\frac14\int_{\mathbb{R}^3}\!d^3\mathbf{v}
-\int_{\mathbb{R}^3}\!d^3\mathbf{v}_*
-\int_{\mathbb{S}^2}\!d\Omega\,
-B(g,\chi)(A-A')\ln\left(\frac{A}{A'}\right).
-$$
+The *hydrodynamic limit* concerns the conditions under which equations such as Euler or Navier–Stokes can be obtained from the Boltzmann equation through an appropriate scaling limit.
 
-For any positive numbers $A$ and $A'$, the logarithm increases with its argument, so
+Formally, this requires relating the microscopic collision and transport processes to the macroscopic behavior of the gas. Establishing the limit rigorously is a more difficult problem.
 
-$$
-(A-A')\ln\left(\frac{A}{A'}\right)\ge0.
-$$
+##### Variant equations
 
-Since $B\ge0$, the preceding integral is nonnegative, and its negative is nonpositive. Therefore,
+The derivation above was for a gas of identical particles. For a mixture of different species, we instead introduce a separate distribution for each species. Collisions between different species then contribute to the gain and loss terms for each distribution.
 
-$$
-\left.\frac{dH}{dt}\right|_{\mathrm{coll}}\le0.
-$$
+Quantum effects can also change the collision terms. For fermions, the Pauli exclusion principle suppresses transitions into occupied states. For bosons, transitions into occupied states may instead be enhanced. These lead to quantum variants of the Boltzmann equation.
 
-This is Boltzmann's **$H$-theorem**. With the conventional thermodynamic sign, entropy is proportional to $-k_BH$, so the collisional entropy production is nonnegative.
+Both extensions retain the basic idea of describing how collisions redistribute particles, but the details of the interactions and distributions change.
 
-The microscopic equations governing an isolated pair of particles are reversible: reversing their velocities retraces their trajectories. The $H$-theorem nevertheless selects a direction of evolution for the statistical distribution. The distinction arises because the kinetic description has discarded detailed many-particle correlations through the molecular chaos assumption. It does not imply that Newton's laws have become irreversible.
 
-For a spatially varying system, the same sign applies to **local collisional entropy production**. To conclude that a total entropy increases, we must also account for transport through the boundaries and any external sources.
-
-#### Maxwellian equilibrium
-
-What happens when the $H$-functional no longer decreases? For an elastic collision kernel that connects all relevant scattering directions, equality requires
-
-$$
-ff_*=f'f_*'.
-$$
-
-Taking the logarithm gives
-
-$$
-\ln f+\ln f_*=\ln f'+\ln f_*'.
-$$
-
-Thus $\ln f$ must be a collision invariant. We already know the form of such functions, so
-
-$$
-\ln f=a+\mathbf{b}\cdot\mathbf{v}+c|\mathbf{v}|^2.
-$$
-
-Exponentiating and completing the square in $\mathbf{v}$ produces a Gaussian distribution in velocity space. Its coefficient of $|\mathbf{v}|^2$ must be negative so that the distribution is integrable.
-
-Writing the constants in terms of number density $n$, mean flow velocity $\mathbf{u}$, and temperature $T$, we obtain the **Maxwellian**
-
-$$
-\boxed{\displaystyle
-f_M(\mathbf{v})
-=n\left(\frac{m}{2\pi k_BT}\right)^{3/2}
-\exp\left[-\frac{m|\mathbf{v}-\mathbf{u}|^2}{2k_BT}\right].}
-$$
-
-The mean velocity is $\mathbf{u}$, and the width of the Gaussian is set by $k_BT/m$. More precisely, the mean random kinetic energy per particle satisfies
-
-$$
-\frac{m}{2n}\int_{\mathbb{R}^3}
-|\mathbf{v}-\mathbf{u}|^2f_M\,d^3\mathbf{v}
-=\frac32 k_BT.
-$$
-
-For a Maxwellian, each collision is statistically balanced by its reverse, so $Q(f_M,f_M)=0$. A **global Maxwellian** that is independent of position and time is therefore a stationary solution of the force-free Boltzmann equation. A spatially varying *local* Maxwellian also makes the local collision term vanish, but its transport term need not vanish; it is not necessarily a stationary solution of the full equation.
-
-### Spatially Homogeneous Collisions
-
-The full Boltzmann equation includes transport through position space. We can remove this part temporarily by assuming the distribution is spatially uniform:
-
-$$
-f(t,\mathbf{x},\mathbf{v})=f(t,\mathbf{v}).
-$$
-
-Then $\nabla_{\mathbf{x}}f=0$, and the kinetic equation becomes
-
-$$
-\frac{\partial f}{\partial t}=Q(f,f).
-$$
-
-This **spatially homogeneous Boltzmann equation** isolates the effect of collisions on the velocity distribution. For an elastic, single-species system, the collision invariants imply
-
-$$
-\frac{dn}{dt}=0,\qquad
-\frac{d(n\mathbf{u})}{dt}=\mathbf{0},\qquad
-\frac{d\mathcal{E}}{dt}=0.
-$$
-
-The $H$-theorem gives $dH/dt\le0$. Thus collisions may redistribute the velocities, but they preserve the total particle number, momentum, and energy while driving the distribution toward an equilibrium consistent with these constraints.
-
-We should not interpret this as saying that *every* collision instantly produces a Maxwellian. Rather, repeated collisions gradually alter the distribution. How rapidly equilibrium is approached depends on the collision kernel, the initial distribution, and the boundary or forcing conditions.
-
-### Mathematical Questions and Variants
-
-The Boltzmann equation is obtained from relatively simple collision rules, yet determining the behavior of its solutions is not straightforward. Several questions discussed in Lee's notes arise directly from the structure of the equation.
-
-#### Well-posedness
-
-Before using an evolution equation to predict a distribution, we would like to know three things: whether a solution exists, whether it is unique, and whether a small change in the initial distribution produces only a small change in the solution.
-
-Together, these requirements are called **well-posedness**. They are difficult to establish for the Boltzmann equation because the collision integral is nonlinear and depends on an entire range of velocities and scattering directions. The mathematical problem also changes when we change the collision kernel.
-
-For hard-sphere-like interactions there are useful results under particular assumptions, and additional results are available for distributions close to a Maxwellian. For other interaction kernels, especially those with singular angular dependence, even establishing that the collision integral is well defined may require care. The answer therefore depends on the collision model and the class of solutions being considered.
-
-#### Boundary conditions
-
-So far, particles have been allowed to move through all of space. In a finite container, some particles reach a wall, and we must state what happens next. These statements are **boundary conditions**.
-
-For **specular reflection**, a particle leaves with the same speed and the opposite velocity component normal to the wall. In **bounce-back reflection**, the entire velocity reverses. Another possibility is **diffuse reflection**, in which particles interact with the wall and return with velocities described by a thermal distribution.
-
-These conditions lead to different distributions near the boundary. A condition that is convenient mathematically is not always the most accurate description of a real surface. The correct choice depends on the physical interaction between particles and the wall, not only on the bulk collision operator.
-
-#### Trend to equilibrium
-
-The $H$-theorem tells us that collisions produce entropy in the appropriate statistical sense, and Maxwellians are distributions for which the collision term vanishes. It is then natural to ask whether a gas **approaches a Maxwellian as time passes**.
-
-In a bounded domain, confinement allows particles to keep interacting. Under suitable conditions, we expect the distribution to relax toward equilibrium. A complete mathematical result must also say how quickly this happens.
-
-In unbounded space the situation can be different. Some particles may travel far apart without colliding again. Their motion can cause the distribution to spread through space rather than converge to a single spatially uniform equilibrium.
-
-Thus the long-time behavior depends not only on collisions but also on the domain and the transport of particles through it.
-
-#### Hydrodynamic limit
-
-A gas may be described at different levels of detail. Newtonian mechanics follows individual particles; the Boltzmann equation follows a distribution of positions and velocities; fluid mechanics describes macroscopic quantities such as density, velocity, and temperature.
-
-The **hydrodynamic limit** asks under what scaling and assumptions the kinetic description can be reduced to fluid equations. For example, when collisions are sufficiently frequent relative to macroscopic changes, the distribution may stay close to a local Maxwellian. This can motivate fluid descriptions such as the Euler or Navier–Stokes equations.
-
-The formal calculation is easier than proving that the approximation is mathematically valid. A rigorous limit must control the behavior of the kinetic solution as the relevant microscopic and macroscopic scales are separated.
-
-#### Mixtures and quantum variants
-
-The derivation so far assumed identical, classical particles. Lee's discussion also notes two ways in which the Boltzmann framework can be extended.
-
-For a **mixture**, each particle species has its own distribution $f_a$. A particle of species $a$ may collide with its own species or with a different species $b$, so its collision term includes the contributions of the allowed pairs:
-
-$$
-Q_a=\sum_b Q_{ab}(f_a,f_b).
-$$
-
-The scattering rules and interaction strengths may differ between pairs of species. The same general idea of gain and loss still applies, but there are now several coupled equations instead of one.
-
-For **quantum particles**, the probability of a transition also depends on how occupied its possible final states already are. Fermions are restricted by the Pauli exclusion principle, while bosons can have enhanced transitions into populated states. Their kinetic equations consequently modify the classical gain and loss factors.
-
-Both are variations of the Boltzmann description rather than additional collision operators derived here.
-
-## Source
-
-Gyu Eun Lee, [*The Boltzmann Equation*](https://gyu-eun-lee.github.io/academic/gso_boltzmann.pdf).
+## Sources:
+[1] G. E. Lee. "The Boltzmann Equation".
