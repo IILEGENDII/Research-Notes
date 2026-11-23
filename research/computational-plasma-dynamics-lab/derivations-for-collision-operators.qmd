@@ -392,5 +392,5 @@ Quantum effects can also change the collision terms. For fermions, the Pauli exc
 Both extensions retain the basic idea of describing how collisions redistribute particles, but the details of the interactions and distributions change.
 
 
-## Sources:
+## Sources
 [1] G. E. Lee. "The Boltzmann Equation".
