@@ -1,12 +1,14 @@
 # Derivations for Collision Operators
 
-## Setup
+## Boltzmann Operator
+
+### Setup
 
 Let $P(t,\mathbf{x},\mathbf{v})$ be the one-particle distribution function in six-dimensional phase space. Here, $\mathbf{x}\in\mathbb{R}^3$ is position, $\mathbf{v}\in\mathbb{R}^3$ is velocity, and $t$ is time. If $P$ is normalized as a probability density, then $P\,d^3\mathbf{x}\,d^3\mathbf{v}$ is the probability of finding a particular particle in a small region of phase space. Multiplying by the total number of particles gives the expected number of particles in that region.
 
 Rather than tracking the trajectory of every particle, our goal is to find an equation describing how the distribution changes with time.
 
-### Motion without collisions
+#### Motion without collisions
 
 We first assume that particles undergo no collisions and experience no external forces. Each particle moves with a constant velocity, so over a short time interval $dt$, its position changes by $\mathbf{v}\,dt$ while its velocity remains unchanged.
 
@@ -39,7 +41,6 @@ where $G$ is the rate at which collisions bring particles into a chosen phase-sp
 
 We will first derive these terms for elastic collisions between hard spheres. We can then identify which parts of the derivation remain valid for other interactions, particularly Coulomb collisions in plasmas.
 
-## Boltzmann Operator
 
 ### The hard-sphere model
 
@@ -317,9 +318,9 @@ Typically $b_{\max}$ is associated with a screening scale such as the Debye leng
 
 The dominance of weak, repeated deflections motivates the Landau and Fokker–Planck descriptions considered below.
 
-## Basic Properties of the Boltzmann Operator
+### Basic Properties of the Boltzmann Operator
 
-### Collision invariants
+#### Collision invariants
 
 Although collisions redistribute the velocities of particles, an elastic binary collision cannot change the total number of particles, their total momentum, or their total kinetic energy. We should therefore expect the Boltzmann collision operator to preserve these quantities.
 
@@ -383,7 +384,7 @@ $$
 
 The word *collisional* is essential here. These densities may still change locally because particles flow from one position to another. The collision terms themselves do not create or remove any of the conserved quantities.
 
-### Boltzmann's $H$-theorem
+#### Boltzmann's $H$-theorem
 
 Conservation laws tell us what collisions cannot change. We now ask whether there is a quantity that changes in a preferred direction as collisions redistribute the velocities.
 
@@ -432,7 +433,7 @@ The microscopic equations governing an isolated pair of particles are reversible
 
 For a spatially varying system, the same sign applies to **local collisional entropy production**. To conclude that a total entropy increases, we must also account for transport through the boundaries and any external sources.
 
-### Maxwellian equilibrium
+#### Maxwellian equilibrium
 
 What happens when the $H$-functional no longer decreases? For an elastic collision kernel that connects all relevant scattering directions, equality requires
 
@@ -473,7 +474,7 @@ $$
 
 For a Maxwellian, each collision is statistically balanced by its reverse, so $Q(f_M,f_M)=0$. A **global Maxwellian** that is independent of position and time is therefore a stationary solution of the force-free Boltzmann equation. A spatially varying *local* Maxwellian also makes the local collision term vanish, but its transport term need not vanish; it is not necessarily a stationary solution of the full equation.
 
-## Spatially Homogeneous Collisions
+### Spatially Homogeneous Collisions
 
 The full Boltzmann equation includes transport through position space. We can remove this part temporarily by assuming the distribution is spatially uniform:
 
@@ -499,11 +500,11 @@ The $H$-theorem gives $dH/dt\le0$. Thus collisions may redistribute the velociti
 
 We should not interpret this as saying that *every* collision instantly produces a Maxwellian. Rather, repeated collisions gradually alter the distribution. How rapidly equilibrium is approached depends on the collision kernel, the initial distribution, and the boundary or forcing conditions.
 
-## From Boltzmann to Other Collision Operators
+### From Boltzmann to Other Collision Operators
 
 The Boltzmann operator retains the gain and loss associated with separate binary scattering events. This makes it a natural starting point, but evaluating the full five-dimensional collision integral can be expensive. Other collision operators arise when we replace part of the detailed collision physics with a simpler approximation.
 
-### Small-angle scattering and the Fokker–Planck equation
+#### Small-angle scattering and the Fokker–Planck equation
 
 For Coulomb interactions, most deflections in a weakly coupled plasma are small. Instead of tracking each separate collision, we may describe the combined effect of many encounters as a gradual change in velocity.
 
@@ -529,7 +530,7 @@ The first term represents **drift or drag** through velocity space; the second r
 
 The resulting Fokker–Planck structure is therefore a mathematical consequence of approximating many small random velocity changes by their first two moments. Its coefficients must still be calculated from the physical interactions or modeled separately.
 
-### The Landau collision operator
+#### The Landau collision operator
 
 When the small-angle expansion is performed for weak Coulomb scattering, accounting consistently for the interaction of particles throughout the distribution, the result is the **Landau collision operator**. In the single-species case it may be written
 
@@ -560,7 +561,7 @@ This reflects the fact that weak Coulomb scattering primarily changes the direct
 
 **Boltzmann and Landau do not describe fundamentally different forces.** Both can begin from classical Coulomb interactions. The difference is how much detail of the scattering process is retained. Boltzmann describes discrete deflections through an angular integral; Landau describes their cumulative, small-angle limit. When rare large-angle collisions matter, the Landau approximation can omit effects present in the full collision operator.
 
-### The BGK model
+#### The BGK model
 
 We can simplify further by assuming that the collision term acts mainly to relax the distribution toward a Maxwellian. The **Bhatnagar–Gross–Krook (BGK) model** is
 
@@ -574,7 +575,7 @@ The physical interpretation is direct. If $f$ is already Maxwellian, the collisi
 
 Choosing $f_M$ with the same density, momentum, and energy as $f$ ensures that the BGK operator conserves those three moments. This is useful, but it does not reproduce the full dependence of scattering on relative velocity and deflection angle. In particular, a single relaxation frequency cannot generally capture every rate of momentum, energy, and higher-moment relaxation in a plasma.
 
-### The Lenard–Bernstein model
+#### The Lenard–Bernstein model
 
 A different simplification retains the velocity-space drift and diffusion structure but uses simple coefficients. A conservative single-species form of the **Lenard–Bernstein operator** is
 
@@ -592,7 +593,7 @@ The term $(\mathbf{v}-\mathbf{u})f$ pulls velocities toward the mean flow, while
 
 With the parameters determined from the distribution, the operator conserves particle number, momentum, and kinetic energy under suitable boundary conditions in velocity space. A version that instead holds $\mathbf{u}$ and $T$ fixed represents relaxation toward an imposed background and need not conserve the test species' momentum and energy by itself. This distinction is important when comparing collision operators numerically.
 
-### Multispecies collisions
+#### Multispecies collisions
 
 In a mixture or plasma, different species have different masses, charges, and distributions. Let $f_a$ denote the distribution of species $a$. Its collision term is a sum of contributions from interactions with each species:
 
@@ -602,21 +603,21 @@ $$
 
 A collision between species $a$ and $b$ conserves the **combined** momentum and energy of the two species, but either species may exchange momentum and energy with the other. A multispecies model must therefore be checked for conservation across the complete coupled system, not only within each individual distribution.
 
-### Quantum collision models
+#### Quantum collision models
 
 Classical Boltzmann statistics also change when quantum occupancy effects become significant. For fermions, transitions into occupied states are suppressed by the Pauli exclusion principle; for bosons, occupation can enhance transitions into already populated states.
 
 Schematically, the gain and loss factors are modified by occupancy terms such as $(1+\eta f)$, where $\eta<0$ represents fermionic blocking and $\eta>0$ represents bosonic enhancement after the distributions have been normalized appropriately. These lead to quantum Boltzmann or Uehling–Uhlenbeck equations rather than the ordinary classical collision operator.
 
-## Further Questions and Limitations
+### Further Questions and Limitations
 
-### Mathematical well-posedness
+#### Mathematical well-posedness
 
 A kinetic equation should produce a solution from a given initial distribution, and ideally that solution should be unique and depend continuously on the initial data. These requirements are collectively called **well-posedness**.
 
 For the Boltzmann equation, establishing such properties can be difficult because the collision operator is nonlinear and nonlocal in velocity. Long-range interactions introduce additional difficulties when the collision kernel is singular at small deflection angles. The mathematical results available depend on the interaction kernel, spatial domain, initial data, and regularity assumptions; no single theorem covers every physical case.
 
-### Boundary conditions and plasma–material interactions
+#### Boundary conditions and plasma–material interactions
 
 So far we have described particle–particle collisions in the interior of a gas or plasma. Near a physical wall, we must also prescribe what happens to particles that reach the surface.
 
@@ -624,7 +625,7 @@ Examples include **specular reflection**, in which the outgoing normal velocity 
 
 These wall processes are *boundary conditions*, not ordinary terms in the bulk binary collision integral. In a plasma, the distribution near the wall is also influenced by electric fields and sheath formation. A complete kinetic plasma–material model must combine interior transport, particle collisions, electromagnetic forces, and physically appropriate boundary conditions.
 
-### Approach to equilibrium and the fluid limit
+#### Approach to equilibrium and the fluid limit
 
 The $H$-theorem suggests that collisions tend to reduce deviations from Maxwellian equilibrium. Proving convergence and estimating its rate, however, depend on the domain and the interaction kernel. In a bounded system, repeated collisions may lead toward equilibrium; in an unbounded system, particles may instead disperse into space.
 
@@ -638,7 +639,7 @@ where $\lambda_{\mathrm{mfp}}$ is a characteristic mean free path and $L$ is a m
 
 The Boltzmann equation thus occupies an intermediate level of description: more detailed than fluid mechanics, but much simpler than keeping track of the trajectories and correlations of every particle.
 
-### Adding electromagnetic forces
+#### Adding electromagnetic forces
 
 In a plasma, charged particles accelerate under electric and magnetic fields between collisions. Their kinetic equation must therefore include transport through **velocity space** as well as position space:
 
