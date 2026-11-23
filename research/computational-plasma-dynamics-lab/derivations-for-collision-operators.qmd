@@ -7,5 +7,13 @@ Let $P(x, v, t)$ be the particle distribution function in 6-dimensional phase sp
   \partial_t P + v \cdot \nabla_x P = 0
 \end{equation}
 
+In the presence of collisions, we adjust the RHS, adding a gain term and a loss term that represents the inflow and outflow of the particles, respectively, into a certain location in phase space:
+
+\begin{equation}
+  \partial_t P + v \cdot \nabla_x P = G - L
+\end{equation}
+
+The goal of collision operators is to derive and understand the form of $G$ and $L$. We begin by deriving the Boltzmann operator, and then making additional assumptions for simplified models.
+
 ### Boltzmann Operator
 
