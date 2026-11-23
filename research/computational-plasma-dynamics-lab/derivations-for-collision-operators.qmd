@@ -1,1 +1,11 @@
 # Derivations for Collision Operators
+
+## Setup
+Let $P(x, v, t)$ be the particle distribution function in 6-dimensional phase space. The 6-dimensional analogue of the continuity equation holds. Assuming no external forces or collisions, the continuity is described by:
+
+\begin{equation}
+  \partial_t P + v \cdot \nabla_x P = 0
+\end{equation}
+
+### Boltzmann Operator
+
