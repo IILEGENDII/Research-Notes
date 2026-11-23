@@ -16,4 +16,4 @@ In the presence of collisions, we adjust the RHS, adding a gain term and a loss 
 The goal of collision operators is to derive and understand the form of $G$ and $L$. We begin by deriving the Boltzmann operator, and then making additional assumptions for simplified models.
 
 ### Boltzmann Operator
-
+Consider the collision between two particles, represented as hard spheres. Let $(x, v)$ and $(x_*, v_*)$ be the phase space coordinates, respectively, of the first and the second particle before the collision, and likewise $(x', v')$ and $(x'_*, v'_*)$ be the coordinates of the first and second particles, respectively, after the collision.
